@@ -2,8 +2,8 @@ package utils;
 
 import java.sql.*;
 
-public class JDBCUtil {
-    public static Connection getMysqlConnection() throws ClassNotFoundException, SQLException {
+public class DBUtils {
+    public static Connection getConnection() throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.cj.jdbc.Driver");
         return DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb?useSSL=false&serverTimezone=UTC",
                 "root", "123456");

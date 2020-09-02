@@ -9,8 +9,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.neuedu.pojo.Dept;
-import com.neuedu.util.DBUtils;
+import pojo.Dept;
+import utils.DBUtils;
 
 /**
  *  Dept实现类
@@ -19,12 +19,12 @@ public class DeptDaoImpl {
     /*
      * 添加数据
      */
-	public int insertDept(Dept dept) {
+	public int insertDept(Dept dept) throws Exception {
 //      1.定义相关对象
 		Connection conn = null;
 		PreparedStatement pstm = null;
 //      2.连接数据库
-		conn=DBUtils.getConnection();
+		conn= DBUtils.getConnection();
 //      3.定义SQL语句
 		String sql="insert into dept values(?,?,?,?)";
 		try {
@@ -58,7 +58,7 @@ public class DeptDaoImpl {
     /*
      * 删除数据
      */
-	public int deleteDept(int deptNo) {
+	public int deleteDept(int deptNo) throws Exception {
 //		1.定义相关对象
 		Connection conn = null;
 		PreparedStatement pstm = null;
@@ -94,7 +94,7 @@ public class DeptDaoImpl {
     /*
      * 修改数据
      */
-	public void updateDept(Dept dept) {
+	public void updateDept(Dept dept) throws Exception {
 //		1.定义对象
 		Connection conn=null;
 		PreparedStatement pstm=null;
@@ -123,7 +123,7 @@ public class DeptDaoImpl {
     /*
      * 查询数据
      */
-	public Dept selectDept(String dName) {
+	public Dept selectDept(String dName) throws Exception {
 		
 //		1.定义对象
 		Connection conn=null;
@@ -166,7 +166,7 @@ public class DeptDaoImpl {
     /*
      * 全查询数据
      */	
-	public List<Dept> selectDeptList(){
+	public List<Dept> selectDeptList() throws Exception{
 //		1.定义对象
 		Connection conn=null;
 		PreparedStatement pstm=null;

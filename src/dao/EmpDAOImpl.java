@@ -1,7 +1,7 @@
 package dao;
 
 import pojo.Emp;
-import utils.JDBCUtil;
+import utils.DBUtils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -31,7 +31,7 @@ public class EmpDAOImpl implements EmpDAO {
         Connection conn=null;
         Emp emp = new Emp();
         try {
-            conn= JDBCUtil.getMysqlConnection();
+            conn= DBUtils.getConnection();
             ps=conn.prepareStatement(sql);
             ps.setString(1,name);
             ResultSet rSet = ps.executeQuery();
