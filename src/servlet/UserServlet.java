@@ -20,7 +20,7 @@ public class UserServlet extends BaseServlet {
         String password = request.getParameter("password");
         if (username == null || password == null) {
             request.setAttribute("error", "登录信息有误！请重试");
-            request.getRequestDispatcher("page-login.jsp").forward(request, response);
+            request.getRequestDispatcher("login.jsp").forward(request, response);
             return;
         } else {
             EmpDAO empDAO = new EmpDAOImpl();
@@ -40,6 +40,6 @@ public class UserServlet extends BaseServlet {
 
         }
         request.setAttribute("error", "账号或密码错误");
-        request.getRequestDispatcher("page-login.jsp").forward(request, response);
+        request.getRequestDispatcher("login.jsp").forward(request, response);
     }
 }

@@ -40,7 +40,7 @@
     <div class="container">
         <div class="login-content">
             <div class="login-logo">
-                <a href="examples/index.html">
+                <a href="login.jsp">
                     <img class="align-content" src="images/logo.png" alt="">
                 </a>
             </div>
