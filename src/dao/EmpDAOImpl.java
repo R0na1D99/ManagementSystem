@@ -40,6 +40,7 @@ public class EmpDAOImpl implements EmpDAO {
 
     @Override
     public void update(Emp emp) throws Exception {
+        //sql语句有问题
         String sql = "update emp values(?,?,?,?,?,?,?,?,?,?,?) where empno=?";
         PreparedStatement ps = null;
         Connection conn=null;

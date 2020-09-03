@@ -13,7 +13,6 @@ import java.io.IOException;
 
 public class JobServlet extends BaseServlet {
     public void add(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
         int jobno = Integer.valueOf(request.getParameter("jobno"));
         String jname = request.getParameter("jname");
         String jtype = request.getParameter("jtype");
@@ -34,6 +33,45 @@ public class JobServlet extends BaseServlet {
         }else{
             request.setAttribute("error", "登录信息有误");
             request.getRequestDispatcher("Jobs/addJob.jsp").forward(request, response);
+        }
+    }
+    public void delete(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        int jobno = Integer.valueOf(request.getParameter("jobno"));
+        if(!String.valueOf(jobno).equals("")){
+            JobDAO jobDAO=new JobDAOImpl();
+            jobDAO.delete(jobno);
+            response.sendRedirect("/ManagementSystem/Jobs/modify.jsp");
+        }else{
+            response.sendRedirect("/ManagementSystem/Jobs/modify.jsp");
+        }
+    }
+    public void modify(HttpServletRequest request, HttpServletResponse response) throws Exception{
+        JobDAOImpl jobDAO = new JobDAOImpl();
+        String s_no = request.getParameter("jobno");
+        if(s_no!=null){
+            Job job = jobDAO.findByNo(Integer.valueOf(s_no));
+            request.setAttribute("job",job);
+            request.getRequestDispatcher("Jobs/modifyJob.jsp").forward(request,response);
+        }else{
+            request.getRequestDispatcher("Jobs/modify.jsp").forward(request,response);
+        }
+    }
+    public void modifyJob(HttpServletRequest request, HttpServletResponse response) throws Exception{
+        String s_jobno=request.getParameter("jobno");
+        String jname=request.getParameter("jname");
+        String jtype=request.getParameter("jtype");
+        if(s_jobno!=null&&jname!=null&&jtype!=null&&!s_jobno.equals("")&&!s_jobno.equals("-1")&&!jname.equals("")&&!jtype.equals("")){
+            Job job=new Job();
+            job.setJobno(Integer.valueOf(s_jobno));
+            job.setJname(jname);
+            job.setJtype(jtype);
+            JobDAO jobDAO=new JobDAOImpl();
+            jobDAO.update(job);
+            request.setAttribute("error","信息修改成功");
+            request.getRequestDispatcher("Jobs/modify.jsp").forward(request,response);
+        }else{
+            request.setAttribute("error","修改信息有误");
+            request.getRequestDispatcher("Jobs/modify.jsp").forward(request,response);
         }
     }
 }

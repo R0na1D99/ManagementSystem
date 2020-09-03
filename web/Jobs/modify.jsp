@@ -1,3 +1,7 @@
+<%@ page import="dao.JobDAOImpl" %>
+<%@ page import="pojo.Job" %>
+<%@ page import="java.util.List" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%--
   Created by IntelliJ IDEA.
   User: mlixi
@@ -9,6 +13,9 @@
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+    JobDAOImpl jobDAO = new JobDAOImpl();
+    List<Job> list = jobDAO.findAll();
+    session.setAttribute("list",list);
 %>
 <!--[if lt IE 7]>
 <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -21,7 +28,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Empty</title>
+    <title>查看岗位信息</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -42,7 +49,6 @@
 
     <link href="https://cdn.jsdelivr.net/npm/weathericons@2.1.0/css/weather-icons.css" rel="stylesheet"/>
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.css" rel="stylesheet"/>
-
     <style>
         #weatherWidget .currentDesc {
             color: #ffffff !important;
@@ -102,18 +108,16 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                        aria-expanded="false"> <i class="menu-icon fa fa-cogs"></i>部门管理</a>
                     <ul class="sub-menu children dropdown-menu">
-                        <li><i class="fa fa-id-badge"></i><a href="Jobs/addJob.jsp">新建部门</a></li>
+                        <li><i class="fa fa-id-badge"></i><a href="#">新建部门</a></li>
                         <li><i class="fa fa-bars"></i><a href="#">部门信息</a></li>
-                        <li><i class="fa fa-th"></i><a href="#">查询部门下员工</a></li>
                     </ul>
                 </li>
                 <li class="menu-item-has-children dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                        aria-expanded="false"> <i class="menu-icon fa fa-table"></i>岗位管理</a>
                     <ul class="sub-menu children dropdown-menu">
-                        <li><i class="fa fa-id-badge"></i><a href="#">增加岗位</a></li>
-                        <li><i class="fa fa-bars"></i><a href="#">岗位信息</a></li>
-                        <li><i class="fa fa-th"></i><a href="#">查询岗位下员工</a></li>
+                        <li><i class="fa fa-id-badge"></i><a href="<%=basePath%>Jobs/addJob.jsp">增加岗位</a></li>
+                        <li><i class="fa fa-bars"></i><a href="<%=basePath%>Jobs/modify.jsp">岗位信息</a></li>
                     </ul>
                 </li>
                 <li class="menu-item-has-children dropdown">
@@ -210,7 +214,9 @@
         <!-- Animated -->
         <div class="animated fadeIn">
             <div class="row">
-
+                <c:if test="${not empty error }">
+                    <div class="alert alert-primary" role="alert" style="margin-left: 40px">${error}</div>
+                </c:if>
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
@@ -223,10 +229,23 @@
                                     <th>岗位ID</th>
                                     <th>岗位名称</th>
                                     <th>岗位类型</th>
-                                    <th>修改信息</th>
+                                    <th>编辑操作</th>
                                 </tr>
                                 </thead>
                                 <tbody>
+                                <c:forEach items="${list}" var="job">
+                                    <tr>
+                                        <th>${job.jobno}</th>
+                                        <th>${job.jname}</th>
+                                        <th>${job.jtype}</th>
+                                        <th><a onclick="firm(${job.jobno})" href="#" style="color: darkred">删除</a>&nbsp
+                                            <a href="<%=basePath%>JobServlet?method=modify&jobno=${job.jobno}">修改</a>&nbsp
+                                            <a href="<%=basePath%>JobServlet?method=showEmp&jobno=${job.jobno}">查看员工</a>
+                                        </th>
+                                    </tr>
+                                </c:forEach>
+                                </tbody>
+
                             </table>
                         </div>
                     </div>
@@ -251,7 +270,13 @@
     <!-- /.site-footer -->
 </div>
 <!-- /#right-panel -->
-
+<script language="javascript">
+    function firm(jobno) {
+        if (confirm("确定删除？")) {
+            location.href = "<%=basePath%>JobServlet?method=delete&jobno=" + jobno;
+        }
+    }
+</script>
 <!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>

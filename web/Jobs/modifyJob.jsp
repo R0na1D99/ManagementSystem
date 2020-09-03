@@ -1,4 +1,16 @@
-<!doctype html>
+<%@ page import="dao.JobDAOImpl" %>
+<%@ page import="pojo.Job" %><%--
+  Created by IntelliJ IDEA.
+  User: mlixi
+  Date: 2020/9/3
+  Time: 13:07
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+%>
 <!--[if lt IE 7]>
 <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>
@@ -10,10 +22,9 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Empty</title>
+    <title>修改岗位信息</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
@@ -22,8 +33,8 @@
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
-    <link rel="stylesheet" href="assets/css/cs-skin-elastic.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="<%=basePath%>assets/css/cs-skin-elastic.css">
+    <link rel="stylesheet" href="<%=basePath%>assets/css/style.css">
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
     <link href="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css" rel="stylesheet">
@@ -90,18 +101,16 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                        aria-expanded="false"> <i class="menu-icon fa fa-cogs"></i>部门管理</a>
                     <ul class="sub-menu children dropdown-menu">
-                        <li><i class="fa fa-id-badge"></i><a href="Jobs/addJob.jsp">新建部门</a></li>
+                        <li><i class="fa fa-id-badge"></i><a href="#">新建部门</a></li>
                         <li><i class="fa fa-bars"></i><a href="#">部门信息</a></li>
-                        <li><i class="fa fa-th"></i><a href="#">查询部门下员工</a></li>
                     </ul>
                 </li>
                 <li class="menu-item-has-children dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                        aria-expanded="false"> <i class="menu-icon fa fa-table"></i>岗位管理</a>
                     <ul class="sub-menu children dropdown-menu">
-                        <li><i class="fa fa-id-badge"></i><a href="#">增加岗位</a></li>
-                        <li><i class="fa fa-bars"></i><a href="#">岗位信息</a></li>
-                        <li><i class="fa fa-th"></i><a href="#">查询岗位下员工</a></li>
+                        <li><i class="fa fa-id-badge"></i><a href="<%=basePath%>Jobs/addJob.jsp">增加岗位</a></li>
+                        <li><i class="fa fa-bars"></i><a href="<%=basePath%>Jobs/modify.jsp">岗位信息</a></li>
                     </ul>
                 </li>
                 <li class="menu-item-has-children dropdown">
@@ -131,8 +140,8 @@
     <header id="header" class="header">
         <div class="top-left">
             <div class="navbar-header">
-                <a class="navbar-brand" href=""><img src="images/logo.png" alt="Logo"></a>
-                <a class="navbar-brand hidden" href=""><img src="images/logo2.png" alt="Logo"></a>
+                <a class="navbar-brand" href=""><img src="<%=basePath%>images/logo.png" alt="Logo"></a>
+                <a class="navbar-brand hidden" href=""><img src="<%=basePath%>images/logo2.png" alt="Logo"></a>
                 <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
             </div>
         </div>
@@ -174,7 +183,7 @@
                 <div class="user-area dropdown float-right">
                     <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true"
                        aria-expanded="false">
-                        <img class="user-avatar rounded-circle" src="images/admin.jpg" alt="User Avatar">
+                        <img class="user-avatar rounded-circle" src="<%=basePath%>images/admin.jpg" alt="User Avatar">
                     </a>
 
                     <div class="user-menu dropdown-menu">
@@ -197,29 +206,29 @@
     <div class="content">
         <!-- Animated -->
         <div class="animated fadeIn">
-            <div class="row">
-
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <strong class="card-title">岗位信息</strong>
-                        </div>
-                        <div class="card-body">
-                            <table id="bootstrap-data-table" class="table table-striped table-bordered">
-                                <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Position</th>
-                                    <th>Office</th>
-                                    <th>Salary</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                            </table>
-                        </div>
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>岗位信息</strong> ${job.jname}
+                    </div>
+                    <div class="card-body card-block">
+                        <form action="JobServlet?method=modifyJob" method="post" class="form-horizontal">
+                            <div class="row form-group">
+                                <div class="col col-md-3"><label for="jobno" class=" form-control-label">岗位ID</label></div>
+                                <div class="col-12 col-md-9"><input type="text" id="jobno" name="jobno" value="${job.jobno}" readonly="readonly" class="form-control"><small class="form-text text-muted">岗位ID不可修改</small></div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-3"><label for="jname" class=" form-control-label">岗位名称</label></div>
+                                <div class="col-12 col-md-9"><input type="text" id="jname" name="jname" value="${job.jname}" class="form-control"><small class="form-text text-muted">修改岗位名称</small></div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-3"><label for="jtype" class=" form-control-label">岗位类别</label></div>
+                                <div class="col-12 col-md-9"><input type="text" id="jtype" name="jtype" value="${job.jtype}" class="form-control"><small class="form-text  text-muted">修改岗位类别</small></div>
+                            </div>
+                            <button class="btn btn-outline-secondary btn-lg active">修改信息</button>
+                        </form>
                     </div>
                 </div>
-
             </div>
         </div>
         <!-- .animated -->
@@ -245,18 +254,7 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
-<script src="assets/js/main.js"></script>
-
-<script src="../assets/js/lib/data-table/datatables.min.js"></script>
-<script src="../assets/js/lib/data-table/dataTables.bootstrap.min.js"></script>
-<script src="../assets/js/lib/data-table/dataTables.buttons.min.js"></script>
-<script src="../assets/js/lib/data-table/buttons.bootstrap.min.js"></script>
-<script src="../assets/js/lib/data-table/jszip.min.js"></script>
-<script src="../assets/js/lib/data-table/vfs_fonts.js"></script>
-<script src="../assets/js/lib/data-table/buttons.html5.min.js"></script>
-<script src="../assets/js/lib/data-table/buttons.print.min.js"></script>
-<script src="../assets/js/lib/data-table/buttons.colVis.min.js"></script>
-<script src="../assets/js/init/datatables-init.js"></script>
+<script src="<%=basePath%>assets/js/main.js"></script>
 
 <!--  Chart js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.7.3/dist/Chart.bundle.min.js"></script>
@@ -270,17 +268,11 @@
 <script src="https://cdn.jsdelivr.net/npm/flot-spline@0.0.1/js/jquery.flot.spline.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/simpleweather@3.1.0/jquery.simpleWeather.min.js"></script>
-<script src="assets/js/init/weather-init.js"></script>
+<script src="<%=basePath%>assets/js/init/weather-init.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.js"></script>
-<script src="assets/js/init/fullcalendar-init.js"></script>
-
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('#bootstrap-data-table-export').DataTable();
-    } );
-</script>
+<script src="<%=basePath%>assets/js/init/fullcalendar-init.js"></script>
 
 <!--Local Stuff-->
 <script>

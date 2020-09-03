@@ -33,15 +33,15 @@ public class JobDAOImpl implements JobDAO{
 
     @Override
     public void update(Job job) throws Exception {
-        String sql = "update job values(?,?,?) where jobno=?";
+        String sql = "update job set jname=?,jtype=? where jobno=?";
         PreparedStatement ps = null;
         Connection conn=null;
         try {
             conn= DBUtils.getConnection();
             ps=conn.prepareStatement(sql);
-            ps.setInt(1,job.getJobno());
-            ps.setString(2,job.getJname());
-            ps.setString(3,job.getJtype());
+            ps.setInt(3,job.getJobno());
+            ps.setString(1,job.getJname());
+            ps.setString(2,job.getJtype());
             ps.executeUpdate();
             ps.close();
         }catch (Exception e){

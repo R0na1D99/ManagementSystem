@@ -6,6 +6,10 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+%>
 <!--[if lt IE 7]>
 <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>
@@ -97,18 +101,16 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                        aria-expanded="false"> <i class="menu-icon fa fa-cogs"></i>部门管理</a>
                     <ul class="sub-menu children dropdown-menu">
-                        <li><i class="fa fa-id-badge"></i><a href="Jobs/addJob.jsp">新建部门</a></li>
+                        <li><i class="fa fa-id-badge"></i><a href="#">新建部门</a></li>
                         <li><i class="fa fa-bars"></i><a href="#">部门信息</a></li>
-                        <li><i class="fa fa-th"></i><a href="#">查询部门下员工</a></li>
                     </ul>
                 </li>
                 <li class="menu-item-has-children dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                        aria-expanded="false"> <i class="menu-icon fa fa-table"></i>岗位管理</a>
                     <ul class="sub-menu children dropdown-menu">
-                        <li><i class="fa fa-id-badge"></i><a href="#">增加岗位</a></li>
-                        <li><i class="fa fa-bars"></i><a href="#">岗位信息</a></li>
-                        <li><i class="fa fa-th"></i><a href="#">查询岗位下员工</a></li>
+                        <li><i class="fa fa-id-badge"></i><a href="<%=basePath%>Jobs/addJob.jsp">增加岗位</a></li>
+                        <li><i class="fa fa-bars"></i><a href="<%=basePath%>Jobs/modify.jsp">岗位信息</a></li>
                     </ul>
                 </li>
                 <li class="menu-item-has-children dropdown">
