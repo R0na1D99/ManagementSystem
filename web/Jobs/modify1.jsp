@@ -1,11 +1,15 @@
 <%--
   Created by IntelliJ IDEA.
   User: mlixi
-  Date: 2020/9/2
-  Time: 15:59
+  Date: 2020/9/3
+  Time: 9:06
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+%>
 <!--[if lt IE 7]>
 <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>
@@ -17,7 +21,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>主页</title>
+    <title>Empty</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -26,18 +30,19 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
-    <link rel="stylesheet" href="assets/css/cs-skin-elastic.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="<%=path%>/assets/css/cs-skin-elastic.css">
+    <link rel="stylesheet" href="<%=path%>/assets/css/style.css">
+    <link rel="stylesheet" href="<%=path%>/assets/css/lib/datatable/dataTables.bootstrap.min.css">
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
     <link href="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css" rel="stylesheet">
 
     <link href="https://cdn.jsdelivr.net/npm/weathericons@2.1.0/css/weather-icons.css" rel="stylesheet"/>
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.css" rel="stylesheet"/>
-    <link href="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css" rel="stylesheet">
+
     <style>
         #weatherWidget .currentDesc {
             color: #ffffff !important;
@@ -138,8 +143,8 @@
     <header id="header" class="header">
         <div class="top-left">
             <div class="navbar-header">
-                <a class="navbar-brand" href=""><img src="images/logo.png" alt="Logo"></a>
-                <a class="navbar-brand hidden" href=""><img src="images/logo2.png" alt="Logo"></a>
+                <a class="navbar-brand" href=""><img src="<%=path%>/images/logo.png" alt="Logo"></a>
+                <a class="navbar-brand hidden" href=""><img src="<%=path%>/images/logo2.png" alt="Logo"></a>
                 <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
             </div>
         </div>
@@ -181,7 +186,7 @@
                 <div class="user-area dropdown float-right">
                     <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true"
                        aria-expanded="false">
-                        <img class="user-avatar rounded-circle" src="images/admin.jpg" alt="User Avatar">
+                        <img class="user-avatar rounded-circle" src="<%=path%>/images/admin.jpg" alt="User Avatar">
                     </a>
 
                     <div class="user-menu dropdown-menu">
@@ -202,104 +207,34 @@
     <!-- /#header -->
     <!-- Content -->
     <div class="content">
-        <div class="content">
-            <!-- Widgets  -->
+        <!-- Animated -->
+        <div class="animated fadeIn">
             <div class="row">
 
-                <div class="col-lg-3 col-md-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="stat-widget-one">
-                                <div class="stat-icon dib"><i class="ti-comments text-success border-success"></i></div>
-                                <div class="stat-content dib">
-                                    <div class="stat-text">部门数</div>
-                                    <div class="stat-digit">1,012</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="stat-widget-one">
-                                <div class="stat-icon dib"><i class="ti-palette text-primary border-primary"></i></div>
-                                <div class="stat-content dib">
-                                    <div class="stat-text">岗位数</div>
-                                    <div class="stat-digit">961</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="stat-widget-one">
-                                <div class="stat-icon dib"><i class="ti-user text-warning border-warning"></i></div>
-                                <div class="stat-content dib">
-                                    <div class="stat-text">员工数</div>
-                                    <div class="stat-digit">770</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-
+                <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <strong class="card-title">Dismissing Alerts</strong>
+                            <strong class="card-title">岗位信息</strong>
                         </div>
                         <div class="card-body">
-                            <div class="sufee-alert alert with-close alert-primary alert-dismissible fade show">
-                                <span class="badge badge-pill badge-primary">通知</span>
-                                公司通知1
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-
-                            <div class="sufee-alert alert with-close alert-secondary alert-dismissible fade show">
-                                <span class="badge badge-pill badge-secondary">通知</span>
-                                公司通知2
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
+                            <table id="bootstrap-data-table" class="table table-striped table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>岗位ID</th>
+                                    <th>岗位名称</th>
+                                    <th>岗位类型</th>
+                                    <th>修改信息</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
-
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4>项目进度</h4>
-                        </div>
-                        <div class="card-body">
-                            <p class="muted">在进展中的项目进度</p>
-                            <div class="progress mb-2">
-                                <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
-                            </div>
-                            <div class="progress mb-2">
-                                <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
-                            </div>
-                            <div class="progress mb-2">
-                                <div class="progress-bar bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">75%</div>
-                            </div>
-                            <div class="progress mb-2">
-                                <div class="progress-bar bg-danger" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">90%</div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /# card -->
-                </div><!-- /col-lg-6 -->
 
             </div>
         </div>
+        <!-- .animated -->
     </div>
     <!-- /.content -->
     <div class="clearfix"></div>
@@ -324,6 +259,17 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
 <script src="assets/js/main.js"></script>
 
+<script src="<%=path%>/assets/js/lib/data-table/datatables.min.js"></script>
+<script src="<%=path%>/assets/js/lib/data-table/dataTables.bootstrap.min.js"></script>
+<script src="<%=path%>/assets/js/lib/data-table/dataTables.buttons.min.js"></script>
+<script src="<%=path%>/assets/js/lib/data-table/buttons.bootstrap.min.js"></script>
+<script src="<%=path%>/assets/js/lib/data-table/jszip.min.js"></script>
+<script src="<%=path%>/assets/js/lib/data-table/vfs_fonts.js"></script>
+<script src="<%=path%>/assets/js/lib/data-table/buttons.html5.min.js"></script>
+<script src="<%=path%>/assets/js/lib/data-table/buttons.print.min.js"></script>
+<script src="<%=path%>/assets/js/lib/data-table/buttons.colVis.min.js"></script>
+<script src="<%=path%>/assets/js/init/datatables-init.js"></script>
+
 <!--  Chart js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.7.3/dist/Chart.bundle.min.js"></script>
 
@@ -340,7 +286,14 @@
 
 <script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.js"></script>
-<script src="assets/js/init/fullcalendar-init.js"></script>
+<script src="<%=basePath%>/assets/js/init/fullcalendar-init.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#bootstrap-data-table-export').DataTable();
+    } );
+</script>
+
 <!--Local Stuff-->
 <script>
     jQuery(document).ready(function ($) {
@@ -458,7 +411,7 @@
                     data.element.animate({
                         d: {
                             begin: 2000 * data.index,
-                            dur: 500,
+                            dur: 2000,
                             from: data.path.clone().scale(1, 0).translate(0, data.chartRect.height()).stringify(),
                             to: data.path.clone().stringify(),
                             easing: Chartist.Svg.Easing.easeOutQuint

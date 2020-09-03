@@ -26,7 +26,7 @@ public class UserServlet extends BaseServlet {
             EmpDAO empDAO = new EmpDAOImpl();
             Emp emp = null;
             try {
-                emp  = empDAO.findByName(username);
+                emp = empDAO.findByName(username);
             } catch (Exception e) {
                 e.printStackTrace();
             }
