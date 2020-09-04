@@ -65,98 +65,72 @@
         #flotBarChart {
             height: 150px;
         }
-        #cellPaiChart{
-            height: 160px;
-        }
 
-    </style>
+    #cellPaiChart {
+        height: 160px;
+    }
+
+   </style>
 </head>
 
 <body>
-    <!-- Left Panel -->
-    <aside id="left-panel" class="left-panel">
-        <nav class="navbar navbar-expand-sm navbar-default">
-            <div id="main-menu" class="main-menu collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li class="active">
-                        <a href="index.html"><i class="menu-icon fa fa-laptop"></i>员工管理系统</a>
-                    </li>
-                    <li class="menu-title">UI elements</li><!-- /.menu-title -->
-                    
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>部门管理</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-table"></i><a href="DeptListController">部门信息</a></li>
-                            <li><i class="fa fa-table"></i><a href="addDept.jsp">新建部门</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Tables</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-table"></i><a href="tables-basic.html">Basic Table</a></li>
-                            <li><i class="fa fa-table"></i><a href="tables-data.html">Data Table</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-th"></i>Forms</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="menu-icon fa fa-th"></i><a href="forms-basic.html">Basic Form</a></li>
-                            <li><i class="menu-icon fa fa-th"></i><a href="forms-advanced.html">Advanced Form</a></li>
-                        </ul>
-                    </li>
-
-                    <li class="menu-title">Icons</li><!-- /.menu-title -->
-
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-tasks"></i>Icons</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="menu-icon fa fa-fort-awesome"></i><a href="font-fontawesome.html">Font Awesome</a></li>
-                            <li><i class="menu-icon ti-themify-logo"></i><a href="font-themify.html">Themefy Icons</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="widgets.html"> <i class="menu-icon ti-email"></i>Widgets </a>
-                    </li>
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-bar-chart"></i>Charts</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="menu-icon fa fa-line-chart"></i><a href="charts-chartjs.html">Chart JS</a></li>
-                            <li><i class="menu-icon fa fa-area-chart"></i><a href="charts-flot.html">Flot Chart</a></li>
-                            <li><i class="menu-icon fa fa-pie-chart"></i><a href="charts-peity.html">Peity Chart</a></li>
-                        </ul>
-                    </li>
-
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-area-chart"></i>Maps</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="menu-icon fa fa-map-o"></i><a href="maps-gmap.html">Google Maps</a></li>
-                            <li><i class="menu-icon fa fa-street-view"></i><a href="maps-vector.html">Vector Maps</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-title">Extras</li><!-- /.menu-title -->
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-glass"></i>Pages</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="menu-icon fa fa-sign-in"></i><a href="page-login.html">Login</a></li>
-                            <li><i class="menu-icon fa fa-sign-in"></i><a href="page-register.html">Register</a></li>
-                            <li><i class="menu-icon fa fa-paper-plane"></i><a href="pages-forget.html">Forget Pass</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div><!-- /.navbar-collapse -->
-        </nav>
-    </aside>
-    <!-- /#left-panel -->
-    <!-- Right Panel -->
-    <div id="right-panel" class="right-panel">
-        <!-- Header-->
-        <header id="header" class="header">
-            <div class="top-left">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="./"><img src="images/logo.png" alt="Logo"></a>
-                    <a class="navbar-brand hidden" href="./"><img src="images/logo2.png" alt="Logo"></a>
-                    <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
-                </div>
+<!-- Left Panel -->
+<aside id="left-panel" class="left-panel">
+    <nav class="navbar navbar-expand-sm navbar-default">
+        <div id="main-menu" class="main-menu collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active">
+                    <a href="<%=basePath%>index.jsp"><i class="menu-icon fa fa-laptop"></i>主页 </a>
+                </li>
+                <li class="menu-title">管理中心</li><!-- /.menu-title -->
+                <li class="menu-item-has-children dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                       aria-expanded="false"> <i class="menu-icon fa fa-cogs"></i>部门管理</a>
+                    <ul class="sub-menu children dropdown-menu">
+                        <li><i class="fa fa-id-badge"></i><a href="<%=basePath%>/Dept/addDept.jsp">新建部门</a></li>
+                        <li><i class="fa fa-bars"></i><a href="<%=basePath%>/Dept/deptManage.jsp">部门信息</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item-has-children dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                       aria-expanded="false"> <i class="menu-icon fa fa-table"></i>岗位管理</a>
+                    <ul class="sub-menu children dropdown-menu">
+                        <li><i class="fa fa-id-badge"></i><a href="<%=basePath%>Jobs/addJob.jsp">增加岗位</a></li>
+                        <li><i class="fa fa-bars"></i><a href="<%=basePath%>Jobs/modify.jsp">岗位信息</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item-has-children dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                       aria-expanded="false"> <i class="menu-icon fa fa-user"></i>员工入职管理</a>
+                    <ul class="sub-menu children dropdown-menu">
+                        <li><i class="menu-icon fa fa-th"></i><a href="#">从人才库中入职</a></li>
+                        <li><i class="menu-icon fa fa-book"></i><a href="#">普通入职</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item-has-children dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                       aria-expanded="false"> <i class="menu-icon fa fa-minus-circle"></i>员工离职管理</a>
+                    <ul class="sub-menu children dropdown-menu">
+                        <li><i class="menu-icon fa fa-th"></i><a href="<%=basePath%>Emps/deleteEmp.jsp">员工离职</a></li>
+                        <li><i class="menu-icon fa fa-book"></i><a href="<%=basePath%>Emps/search.jsp">已离职员工信息查询</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </nav>
+</aside>
+<!-- /#left-panel -->
+<!-- Right Panel -->
+<div id="right-panel" class="right-panel">
+    <!-- Header-->
+    <header id="header" class="header">
+        <div class="top-left">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="./"><img src="images/logo.png" alt="Logo"></a>
+                <a class="navbar-brand hidden" href="./"><img src="images/logo2.png" alt="Logo"></a>
+                <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
+            </div>
             </div>
             <div class="top-right">
                 <div class="header-menu">
@@ -258,51 +232,61 @@
         <div class="content">
             <!-- Animated -->
             <div class="animated fadeIn">
-                 <form action="DeptInsertController">
-                     <div class="col-lg-6">
-                     <section class="card">
-                            <div class="card-body text-secondary">
-                             <div class="form-group">
+                <div class="col-lg-6">
+                    <section class="card">
+                        <div class="card-body text-secondary">
+                            <form action="DeptUpdateController" method="post" class="form-horizontal">
+                                <div class="form-group">
+                                    <label class=" form-control-label">部门ID</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-credit-card"></i></div>
+                                        <input class="form-control" name="deptNo" value="${dept.deptNo}"
+                                               readonly="readonly"><small class="form-text text-muted">部门ID不可修改</small>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
                                     <label class=" form-control-label">部门名称</label>
                                     <div class="input-group">
                                         <div class="input-group-addon"><i class="fa fa-asterisk"></i></div>
-                                        <input class="form-control",name="dNmae">
+                                        <input class="form-control" name="dName" value="${dept.dName}">
                                     </div>
-                 </div>            
-                 
-                 <div class="form-group">
-                                    <label class=" form-control-label">部门编号</label>
-                                    <div class="input-group">
-                                        <div class="input-group-addon"><i class="fa fa-credit-card"></i></div>
-                                        <input class="form-control",name="DeptNo">
-                                    </div>
-                 </div>            
+                                </div>
 
-            	 <div class="form-group">
+
+                                <div class="form-group">
                                     <label class=" form-control-label">部门电话</label>
                                     <div class="input-group">
                                         <div class="input-group-addon"><i class="fa fa-phone"></i></div>
-                                        <input class="form-control",name="dTel">
+                                        <input class="form-control" name="dTel" value="${dept.dTel}">
                                     </div>
-                 </div>
-           	
-            	 <div class="form-group">
+                                </div>
+
+                                <div class="form-group">
                                     <label class=" form-control-label">成立日期</label>
                                     <div class="input-group">
                                         <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                                        <input class="form-control",name="dBirth">
+                                        <input class="form-control" name="dBirth" value="${dept.dBirth}">
                                     </div>
-                 </div>
-             
-                 <button type="button" class="btn btn-primary btn-lg btn-block">提交</button>               
-             	${error }
-                 </form>
-                  
-                            
-                            
-           </div>           
-                            
-        </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class=" form-control-label">部门类型</label>
+                                    <div class="input-group">
+                                        <select name="dType">
+                                            <option value="部门">部门</option>
+                                            <option value="公司">公司</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <button class="btn btn-outline-secondary btn-lg active">修改信息</button>
+                            </form>
+
+
+                        </div>
+
+                </div>
                   </section>
             	
                  
@@ -603,5 +587,15 @@
             // Bar Chart #flotBarChart End
         });
     </script>
+    		<script type="text/javascript">
+			function updateConfirm(deptNo){
+				if(confirm("确定要修改吗") == true){
+					location.href = "DeptDeleteController?deptNo="+deptNo;
+					return true;
+				}else{
+					return false;
+				}
+			}
+		</script>
 </body>
 </html>

@@ -94,15 +94,15 @@
         <div id="main-menu" class="main-menu collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li class="active">
-                    <a href="index.jsp"><i class="menu-icon fa fa-laptop"></i>主页 </a>
+                    <a href="<%=basePath%>index.jsp"><i class="menu-icon fa fa-laptop"></i>主页 </a>
                 </li>
                 <li class="menu-title">管理中心</li><!-- /.menu-title -->
                 <li class="menu-item-has-children dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                        aria-expanded="false"> <i class="menu-icon fa fa-cogs"></i>部门管理</a>
                     <ul class="sub-menu children dropdown-menu">
-                        <li><i class="fa fa-id-badge"></i><a href="#">新建部门</a></li>
-                        <li><i class="fa fa-bars"></i><a href="#">部门信息</a></li>
+                        <li><i class="fa fa-id-badge"></i><a href="<%=basePath%>/Dept/addDept.jsp">新建部门</a></li>
+                        <li><i class="fa fa-bars"></i><a href="<%=basePath%>/Dept/deptManage.jsp">部门信息</a></li>
                     </ul>
                 </li>
                 <li class="menu-item-has-children dropdown">
@@ -125,8 +125,9 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                        aria-expanded="false"> <i class="menu-icon fa fa-minus-circle"></i>员工离职管理</a>
                     <ul class="sub-menu children dropdown-menu">
-                        <li><i class="menu-icon fa fa-th"></i><a href="<%=basePath%>Emp/deleteEmp.jsp">员工离职</a></li>
-                        <li><i class="menu-icon fa fa-book"></i><a href="<%=basePath%>Emp/search.jsp">已离职员工信息查询</a></li>
+                        <li><i class="menu-icon fa fa-th"></i><a href="<%=basePath%>Emps/deleteEmp.jsp">员工离职</a></li>
+                        <li><i class="menu-icon fa fa-book"></i><a href="<%=basePath%>Emps/search.jsp">已离职员工信息查询</a>
+                        </li>
                     </ul>
                 </li>
             </ul>
@@ -231,41 +232,55 @@
                             </thead>
                             <tbody>
                             <c:forEach items="${list}" var="emp">
-                                <tr>
-                                    <th scope="col">${emp.empno}</th>
-                                    <th scope="col">${emp.ename}</th>
-                                    <th scope="col">${emp.epass}</th>
-                                    <c:choose>
-                                        <c:when test="${emp.esex==1}">
-                                            <th scope="col">男</th>
-                                        </c:when>
-                                        <c:when test="${emp.esex==2}">
-                                            <th scope="col">女</th>
-                                        </c:when>
-                                    </c:choose>
-                                    <th scope="col">${emp.ebirth}</th>
-                                    <th scope="col">${emp.eidnum}</th>
-                                    <th scope="col">${emp.deptno}</th>
-                                    <th scope="col">${emp.jobno}</th>
-                                    <th scope="col">${emp.ehiredate}</th>
-                                    <c:choose>
-                                        <c:when test="${emp.etype==1}">
-                                            <th scope="col">正式员工</th>
-                                        </c:when>
-                                        <c:when test="${emp.etype==2}">
-                                            <th scope="col">临时员工</th>
-                                        </c:when>
-                                    </c:choose>
-                                    <c:choose>
-                                        <c:when test="${emp.esource==1}">
-                                            <th scope="col">校园招聘</th>
-                                        </c:when>
-                                        <c:when test="${emp.esource==2}">
-                                            <th scope="col">社会招聘</th>
-                                        </c:when>
-                                    </c:choose>
-                                    <th scope="col">${emp.estore}</th>
-                                </tr>
+                                <c:if test="${emp.etype==1}">
+                                    <tr>
+                                        <th scope="col">${emp.empno}</th>
+                                        <th scope="col">${emp.ename}</th>
+                                        <th scope="col">${emp.epass}</th>
+                                        <c:choose>
+                                            <c:when test="${emp.esex==1}">
+                                                <th scope="col">男</th>
+                                            </c:when>
+                                            <c:when test="${emp.esex==2}">
+                                                <th scope="col">女</th>
+                                            </c:when>
+                                        </c:choose>
+                                        <th scope="col">${emp.ebirth}</th>
+                                        <th scope="col">${emp.eidnum}</th>
+                                        <th scope="col">${emp.deptno}</th>
+                                        <th scope="col">${emp.jobno}</th>
+                                        <th scope="col">${emp.ehiredate}</th>
+                                        <c:choose>
+                                            <c:when test="${emp.etype==0}">
+                                                <th scope="col">退休员工</th>
+                                            </c:when>
+                                            <c:when test="${emp.etype==1}">
+                                                <th scope="col">正式员工</th>
+                                            </c:when>
+                                            <c:when test="${emp.etype==2}">
+                                                <th scope="col">临时员工</th>
+                                            </c:when>
+                                            <c:when test="${emp.etype==3}">
+                                                <th scope="col">被辞退员工</th>
+                                            </c:when>
+                                            <c:when test="${emp.etype==4}">
+                                                <th scope="col">被开除员工</th>
+                                            </c:when>
+                                            <c:when test="${emp.etype==5}">
+                                                <th scope="col">主动离职员工</th>
+                                            </c:when>
+                                        </c:choose>
+                                        <c:choose>
+                                            <c:when test="${emp.esource==1}">
+                                                <th scope="col">校园招聘</th>
+                                            </c:when>
+                                            <c:when test="${emp.esource==2}">
+                                                <th scope="col">社会招聘</th>
+                                            </c:when>
+                                        </c:choose>
+                                        <th scope="col">${emp.estore}</th>
+                                    </tr>
+                                </c:if>
                             </c:forEach>
                             </tbody>
                         </table>

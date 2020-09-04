@@ -62,7 +62,11 @@
                         </label>
                     </div>
                     <button type="submit" class="btn btn-success btn-flat m-b-30 m-t-30">登录</button>
-                    <div class="error"style=" font-size: medium;color:red;text-align: center">${error}</div>
+                    <c:if test="${not empty error }">
+                        <div class="alert alert-warning" role="alert">
+                                ${error}
+                        </div>
+                    </c:if>
                     <div class="register-link text-center">
                         <p>还没有账户？ <a href="#" style="color: black"> 联系管理员申请</a></p>
                     </div>

@@ -1,6 +1,15 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: mlixi
+  Date: 2020/9/4
+  Time: 13:52
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
-String path = request.getContextPath();
-String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+    String path = request.getContextPath();
+    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
 <!--[if lt IE 7]>
 <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -86,15 +95,15 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
         <div id="main-menu" class="main-menu collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li class="active">
-                    <a href="index.jsp"><i class="menu-icon fa fa-laptop"></i>主页 </a>
+                    <a href="<%=basePath%>index.jsp"><i class="menu-icon fa fa-laptop"></i>主页 </a>
                 </li>
                 <li class="menu-title">管理中心</li><!-- /.menu-title -->
                 <li class="menu-item-has-children dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                        aria-expanded="false"> <i class="menu-icon fa fa-cogs"></i>部门管理</a>
                     <ul class="sub-menu children dropdown-menu">
-                        <li><i class="fa fa-id-badge"></i><a href="#">新建部门</a></li>
-                        <li><i class="fa fa-bars"></i><a href="#">部门信息</a></li>
+                        <li><i class="fa fa-id-badge"></i><a href="<%=basePath%>/Dept/addDept.jsp">新建部门</a></li>
+                        <li><i class="fa fa-bars"></i><a href="<%=basePath%>/Dept/deptManage.jsp">部门信息</a></li>
                     </ul>
                 </li>
                 <li class="menu-item-has-children dropdown">
@@ -117,8 +126,9 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                        aria-expanded="false"> <i class="menu-icon fa fa-minus-circle"></i>员工离职管理</a>
                     <ul class="sub-menu children dropdown-menu">
-                        <li><i class="menu-icon fa fa-th"></i><a href="<%=basePath%>Emp/deleteEmp.jsp">员工离职</a></li>
-                        <li><i class="menu-icon fa fa-book"></i><a href="<%=basePath%>Emp/search.jsp">已离职员工信息查询</a></li>
+                        <li><i class="menu-icon fa fa-th"></i><a href="<%=basePath%>Emps/deleteEmp.jsp">员工离职</a></li>
+                        <li><i class="menu-icon fa fa-book"></i><a href="<%=basePath%>Emps/search.jsp">已离职员工信息查询</a>
+                        </li>
                     </ul>
                 </li>
             </ul>
@@ -198,6 +208,86 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
     <div class="content">
         <!-- Animated -->
         <div class="animated fadeIn">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong class="card-title">人员信息</strong>
+                    </div>
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">员工ID</th>
+                                <th scope="col">姓名</th>
+                                <th scope="col">密码</th>
+                                <th scope="col">性别</th>
+                                <th scope="col">出生日期</th>
+                                <th scope="col">身份证号</th>
+                                <th scope="col">部门ID</th>
+                                <th scope="col">岗位ID</th>
+                                <th scope="col">录用日期</th>
+                                <th scope="col">用工形式</th>
+                                <th scope="col">人员来源</th>
+                                <th scope="col">是否在人才库</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:forEach items="${list}" var="emp">
+                                <c:if test="${emp.etype==1}">
+                                    <tr>
+                                        <th scope="col">${emp.empno}</th>
+                                        <th scope="col">${emp.ename}</th>
+                                        <th scope="col">${emp.epass}</th>
+                                        <c:choose>
+                                            <c:when test="${emp.esex==1}">
+                                                <th scope="col">男</th>
+                                            </c:when>
+                                            <c:when test="${emp.esex==2}">
+                                                <th scope="col">女</th>
+                                            </c:when>
+                                        </c:choose>
+                                        <th scope="col">${emp.ebirth}</th>
+                                        <th scope="col">${emp.eidnum}</th>
+                                        <th scope="col">${emp.deptno}</th>
+                                        <th scope="col">${emp.jobno}</th>
+                                        <th scope="col">${emp.ehiredate}</th>
+                                        <c:choose>
+                                            <c:when test="${emp.etype==0}">
+                                                <th scope="col">退休员工</th>
+                                            </c:when>
+                                            <c:when test="${emp.etype==1}">
+                                                <th scope="col">正式员工</th>
+                                            </c:when>
+                                            <c:when test="${emp.etype==2}">
+                                                <th scope="col">临时员工</th>
+                                            </c:when>
+                                            <c:when test="${emp.etype==3}">
+                                                <th scope="col">被辞退员工</th>
+                                            </c:when>
+                                            <c:when test="${emp.etype==4}">
+                                                <th scope="col">被开除员工</th>
+                                            </c:when>
+                                            <c:when test="${emp.etype==5}">
+                                                <th scope="col">主动离职员工</th>
+                                            </c:when>
+                                        </c:choose>
+                                        <c:choose>
+                                            <c:when test="${emp.esource==1}">
+                                                <th scope="col">校园招聘</th>
+                                            </c:when>
+                                            <c:when test="${emp.esource==2}">
+                                                <th scope="col">社会招聘</th>
+                                            </c:when>
+                                        </c:choose>
+                                        <th scope="col">${emp.estore}</th>
+                                    </tr>
+                                </c:if>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
         <!-- .animated -->
     </div>
@@ -218,6 +308,16 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 <!-- /#right-panel -->
 
 <!-- Scripts -->
+<script type="text/javascript">
+    function deleteConfirm(deptNo) {
+        if (confirm("确定要删除吗") == true) {
+            location.href = "DeptDeleteController?deptNo=" + deptNo;
+            return true;
+        } else {
+            return false;
+        }
+    }
+</script>
 <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>

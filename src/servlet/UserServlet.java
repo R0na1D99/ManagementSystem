@@ -30,14 +30,12 @@ public class UserServlet extends BaseServlet {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            if (emp != null
-                    && emp.getEmpno()!=-1) {
+            if (emp != null && emp.getEmpno() != -1 && emp.getEpass().equals(password)) {
                 request.getSession().setAttribute("user", emp);
                 request.getRequestDispatcher("index.jsp")
                         .forward(request, response);
                 return;
             }
-
         }
         request.setAttribute("error", "账号或密码错误");
         request.getRequestDispatcher("login.jsp").forward(request, response);

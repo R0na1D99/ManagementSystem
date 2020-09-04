@@ -16,6 +16,21 @@ public class Emp {
     private int esource;
     private String estore;
 
+    public Emp(int empno, String ename, String epass, int esex, Date ebirth, String eidnum, int deptno, int jobno, Date ehiredate, int etype, int esource, String estore) {
+        this.empno = empno;
+        this.ename = ename;
+        this.epass = epass;
+        this.esex = esex;
+        this.ebirth = ebirth;
+        this.eidnum = eidnum;
+        this.deptno = deptno;
+        this.jobno = jobno;
+        this.ehiredate = ehiredate;
+        this.etype = etype;
+        this.esource = esource;
+        this.estore = estore;
+    }
+
     public String getEstore() {
         return estore;
     }
@@ -24,7 +39,7 @@ public class Emp {
         this.estore = estore;
     }
 
-    public Emp(){
+    public Emp() {
         empno=-1;
     }
 
