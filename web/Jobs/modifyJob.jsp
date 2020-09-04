@@ -7,6 +7,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -223,7 +224,14 @@
                             </div>
                             <div class="row form-group">
                                 <div class="col col-md-3"><label for="jtype" class=" form-control-label">岗位类别</label></div>
-                                <div class="col-12 col-md-9"><input type="text" id="jtype" name="jtype" value="${job.jtype}" class="form-control"><small class="form-text  text-muted">修改岗位类别</small></div>
+                                <div class="col-12 col-md-9">
+                                    <select id="jtype" name="jtype" class="form-control">
+                                    <option value="管理">管理</option>
+                                    <option value="技术">技术</option>
+                                    <option value="市场">市场</option>
+                                    <option value="营销">营销</option>
+                                    </select>
+                                    <small class="form-text  text-muted">修改岗位类别</small></div>
                             </div>
                             <button class="btn btn-outline-secondary btn-lg active">修改信息</button>
                         </form>

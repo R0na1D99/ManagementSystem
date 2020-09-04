@@ -214,7 +214,7 @@
                 <div class="card">
                     <div class="card-header">增加岗位信息</div>
                     <div class="card-body card-block">
-                        <form action="../JobServlet?method=add" method="post" class="">
+                        <form action="<%=basePath%>JobServlet?method=add" method="post" class="">
                             <div class="form-group">
                                 <div class="input-group">
                                     <div class="input-group-addon">岗位ID</div>

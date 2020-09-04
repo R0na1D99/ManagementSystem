@@ -14,21 +14,18 @@ public class Emp {
     private Date ehiredate;
     private int etype;
     private int esource;
+    private String estore;
+
+    public String getEstore() {
+        return estore;
+    }
+
+    public void setEstore(String estore) {
+        this.estore = estore;
+    }
+
     public Emp(){
         empno=-1;
-    }
-    public Emp(int empno, String ename, String epass, int esex, Date ebirth, String eidnum, int deptno, int jobno, Date ehiredate, int etype, int esource) {
-        this.empno = empno;
-        this.ename = ename;
-        this.epass = epass;
-        this.esex = esex;
-        this.ebirth = ebirth;
-        this.eidnum = eidnum;
-        this.deptno = deptno;
-        this.jobno = jobno;
-        this.ehiredate = ehiredate;
-        this.etype = etype;
-        this.esource = esource;
     }
 
     public int getEmpno() {

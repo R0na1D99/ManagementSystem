@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -21,10 +22,9 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Empty</title>
+    <title>员工信息</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
@@ -33,8 +33,8 @@
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
-    <link rel="stylesheet" href="assets/css/cs-skin-elastic.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="<%=basePath%>assets/css/cs-skin-elastic.css">
+    <link rel="stylesheet" href="<%=basePath%>assets/css/style.css">
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
     <link href="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css" rel="stylesheet">
@@ -140,8 +140,8 @@
     <header id="header" class="header">
         <div class="top-left">
             <div class="navbar-header">
-                <a class="navbar-brand" href=""><img src="images/logo.png" alt="Logo"></a>
-                <a class="navbar-brand hidden" href=""><img src="images/logo2.png" alt="Logo"></a>
+                <a class="navbar-brand" href=""><img src="<%=basePath%>images/logo.png" alt="Logo"></a>
+                <a class="navbar-brand hidden" href=""><img src="<%=basePath%>images/logo2.png" alt="Logo"></a>
                 <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
             </div>
         </div>
@@ -183,7 +183,7 @@
                 <div class="user-area dropdown float-right">
                     <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true"
                        aria-expanded="false">
-                        <img class="user-avatar rounded-circle" src="images/admin.jpg" alt="User Avatar">
+                        <img class="user-avatar rounded-circle" src="<%=basePath%>images/admin.jpg" alt="User Avatar">
                     </a>
 
                     <div class="user-menu dropdown-menu">
@@ -206,7 +206,72 @@
     <div class="content">
         <!-- Animated -->
         <div class="animated fadeIn">
-
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong class="card-title">人员信息</strong>
+                    </div>
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">员工ID</th>
+                                <th scope="col">姓名</th>
+                                <th scope="col">密码</th>
+                                <th scope="col">性别</th>
+                                <th scope="col">出生日期</th>
+                                <th scope="col">身份证号</th>
+                                <th scope="col">部门ID</th>
+                                <th scope="col">岗位ID</th>
+                                <th scope="col">录用日期</th>
+                                <th scope="col">用工形式</th>
+                                <th scope="col">人员来源</th>
+                                <th scope="col">是否在人才库</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:forEach items="${list}" var="emp">
+                                <tr>
+                                    <th scope="col">${emp.empno}</th>
+                                    <th scope="col">${emp.ename}</th>
+                                    <th scope="col">${emp.epass}</th>
+                                    <c:choose>
+                                        <c:when test="${emp.esex==1}">
+                                            <th scope="col">男</th>
+                                        </c:when>
+                                        <c:when test="${emp.esex==2}">
+                                            <th scope="col">女</th>
+                                        </c:when>
+                                    </c:choose>
+                                    <th scope="col">${emp.ebirth}</th>
+                                    <th scope="col">${emp.eidnum}</th>
+                                    <th scope="col">${emp.deptno}</th>
+                                    <th scope="col">${emp.jobno}</th>
+                                    <th scope="col">${emp.ehiredate}</th>
+                                    <c:choose>
+                                        <c:when test="${emp.etype==1}">
+                                            <th scope="col">正式员工</th>
+                                        </c:when>
+                                        <c:when test="${emp.etype==2}">
+                                            <th scope="col">临时员工</th>
+                                        </c:when>
+                                    </c:choose>
+                                    <c:choose>
+                                        <c:when test="${emp.esource==1}">
+                                            <th scope="col">校园招聘</th>
+                                        </c:when>
+                                        <c:when test="${emp.esource==2}">
+                                            <th scope="col">社会招聘</th>
+                                        </c:when>
+                                    </c:choose>
+                                    <th scope="col">${emp.estore}</th>
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
 
         </div>
         <!-- .animated -->
@@ -232,7 +297,7 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
-<script src="assets/js/main.js"></script>
+<script src="<%=basePath%>assets/js/main.js"></script>
 
 <!--  Chart js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.7.3/dist/Chart.bundle.min.js"></script>
@@ -246,11 +311,11 @@
 <script src="https://cdn.jsdelivr.net/npm/flot-spline@0.0.1/js/jquery.flot.spline.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/simpleweather@3.1.0/jquery.simpleWeather.min.js"></script>
-<script src="assets/js/init/weather-init.js"></script>
+<script src="<%=basePath%>assets/js/init/weather-init.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.js"></script>
-<script src="assets/js/init/fullcalendar-init.js"></script>
+<script src="<%=basePath%>assets/js/init/fullcalendar-init.js"></script>
 
 <!--Local Stuff-->
 <script>

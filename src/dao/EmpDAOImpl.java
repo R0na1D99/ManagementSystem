@@ -12,7 +12,7 @@ import java.util.List;
 public class EmpDAOImpl implements EmpDAO {
     @Override
     public void insert(Emp emp) throws Exception {
-        String sql = "insert into emp values(?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "insert into emp values(?,?,?,?,?,?,?,?,?,?,?,?)";
         PreparedStatement ps = null;
         Connection conn=null;
         try {
@@ -29,6 +29,7 @@ public class EmpDAOImpl implements EmpDAO {
             ps.setDate(9,emp.getEhiredate());
             ps.setInt(10,emp.getEtype());
             ps.setInt(11,emp.getEsource());
+            ps.setString(12,emp.getEstore());
             ps.executeUpdate();
             ps.close();
         }catch (Exception e){
@@ -38,10 +39,8 @@ public class EmpDAOImpl implements EmpDAO {
         }
     }
 
-    @Override
     public void update(Emp emp) throws Exception {
-        //sql语句有问题
-        String sql = "update emp values(?,?,?,?,?,?,?,?,?,?,?) where empno=?";
+        String sql = "update emp set empno=?,ename=?,epass=?,esex=?,ebirth=?,eidnum=?,deptno=?,jobno=?,ehiredate=?,etype=?,esource=?,estore=? where empno=?";
         PreparedStatement ps = null;
         Connection conn=null;
         try {
@@ -58,7 +57,8 @@ public class EmpDAOImpl implements EmpDAO {
             ps.setDate(9,emp.getEhiredate());
             ps.setInt(10,emp.getEtype());
             ps.setInt(11,emp.getEsource());
-            ps.setInt(12,emp.getEmpno());
+            ps.setString(12,emp.getEstore());
+            ps.setInt(13,emp.getEmpno());
             ps.executeUpdate();
             ps.close();
         }catch (Exception e){
@@ -107,6 +107,7 @@ public class EmpDAOImpl implements EmpDAO {
                 emp.setEhiredate(rSet.getDate(9));
                 emp.setEtype(rSet.getInt(10));
                 emp.setEsource(rSet.getInt(11));
+                emp.setEstore(rSet.getString(12));
             }
             rSet.close();
             ps.close();
@@ -141,6 +142,7 @@ public class EmpDAOImpl implements EmpDAO {
                 emp.setEhiredate(rSet.getDate(9));
                 emp.setEtype(rSet.getInt(10));
                 emp.setEsource(rSet.getInt(11));
+                emp.setEstore(rSet.getString(12));
             }
             rSet.close();
             ps.close();
@@ -176,6 +178,7 @@ public class EmpDAOImpl implements EmpDAO {
                 emp.setEhiredate(rSet.getDate(9));
                 emp.setEtype(rSet.getInt(10));
                 emp.setEsource(rSet.getInt(11));
+                emp.setEstore(rSet.getString(12));
                 all.add(emp);
             }
             rSet.close();
@@ -211,6 +214,7 @@ public class EmpDAOImpl implements EmpDAO {
                 emp.setEhiredate(rSet.getDate(9));
                 emp.setEtype(rSet.getInt(10));
                 emp.setEsource(rSet.getInt(11));
+                emp.setEstore(rSet.getString(12));
                 all.add(emp);
             }
             rSet.close();

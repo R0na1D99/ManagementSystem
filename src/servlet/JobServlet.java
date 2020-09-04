@@ -18,7 +18,7 @@ import java.util.List;
 
 public class JobServlet extends BaseServlet {
     public void add(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        int jobno = Integer.valueOf(request.getParameter("jobno"));
+       int jobno = Integer.valueOf(request.getParameter("jobno"));
         String jname = request.getParameter("jname");
         String jtype = request.getParameter("jtype");
         if(!String.valueOf(jobno).equals("")&&jname!=null&&jtype!=null){
@@ -81,10 +81,10 @@ public class JobServlet extends BaseServlet {
     }
     public void showEmp(HttpServletRequest request, HttpServletResponse response) throws Exception{
         String s_jobno=request.getParameter("jobno");
-        if(s_jobno!=null){
+        if(s_jobno!=null&&!s_jobno.equals("")){
             EmpDAO empDAO=new EmpDAOImpl();
             List<Emp> emps=new ArrayList<Emp>();
-            //findByJobno
+            emps=empDAO.findByJobNo(Integer.valueOf(s_jobno));
             request.setAttribute("list",emps);
             request.getRequestDispatcher("Jobs/showEmps.jsp").forward(request,response);
         }else{
