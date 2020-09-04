@@ -1,14 +1,19 @@
-<%--
+<%@ page import="dao.EmpDAOImpl" %>
+<%@ page import="pojo.Emp" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
-  User: mlixi
-  Date: 2020/9/2
-  Time: 15:59
+  User: 大馒头
+  Date: 2020/9/4
+  Time: 8:20
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+    //EmpDAOImpl empDao = new EmpDAOImpl();
+    //List<Emp> list = empDao.findAll();
+    //session.setAttribute("list",list);
 %>
 <!--[if lt IE 7]>
 <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -21,7 +26,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>主页</title>
+    <title>Empty</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -30,18 +35,18 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
-    <link rel="stylesheet" href="assets/css/cs-skin-elastic.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/cs-skin-elastic.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
     <link href="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css" rel="stylesheet">
 
     <link href="https://cdn.jsdelivr.net/npm/weathericons@2.1.0/css/weather-icons.css" rel="stylesheet"/>
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.css" rel="stylesheet"/>
-    <link href="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css" rel="stylesheet">
+
     <style>
         #weatherWidget .currentDesc {
             color: #ffffff !important;
@@ -140,8 +145,8 @@
     <header id="header" class="header">
         <div class="top-left">
             <div class="navbar-header">
-                <a class="navbar-brand" href=""><img src="images/logo.png" alt="Logo"></a>
-                <a class="navbar-brand hidden" href=""><img src="images/logo2.png" alt="Logo"></a>
+                <a class="navbar-brand" href=""><img src="../images/logo.png" alt="Logo"></a>
+                <a class="navbar-brand hidden" href=""><img src="../images/logo2.png" alt="Logo"></a>
                 <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
             </div>
         </div>
@@ -183,7 +188,7 @@
                 <div class="user-area dropdown float-right">
                     <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true"
                        aria-expanded="false">
-                        <img class="user-avatar rounded-circle" src="images/admin.jpg" alt="User Avatar">
+                        <img class="user-avatar rounded-circle" src="../images/admin.jpg" alt="User Avatar">
                     </a>
 
                     <div class="user-menu dropdown-menu">
@@ -204,104 +209,69 @@
     <!-- /#header -->
     <!-- Content -->
     <div class="content">
-        <div class="content">
-            <!-- Widgets  -->
-            <div class="row">
+        <h1 align="center">员工离职管理</h1>
+        <br/>
+        <center>
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong class="card-title">员工信息</strong>
+                    </div>
+                    <div class="card-body">
+                        <%--<form action="EmpServlet?method=quit">--%>
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th scope="col" >编号</th>
+                                    <th scope="col">姓名</th>
+                                    <th scope="col">密码</th>
+                                    <th scope="col">性别</th>
+                                    <th scope="col">出生日期</th>
+                                    <th scope="col">身份证号</th>
+                                    <th scope="col">所在部门</th>
+                                    <th scope="col">任职岗位</th>
+                                    <th scope="col">入（离）日期</th>
+                                    <th scope="col">在职状态</th>
+                                    <th scope="col">来源</th>
+                                    <th scope="col">进人才库</th>
+                                    <th scope="col">操作</th>
 
-                <div class="col-lg-3 col-md-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="stat-widget-one">
-                                <div class="stat-icon dib"><i class="ti-comments text-success border-success"></i></div>
-                                <div class="stat-content dib">
-                                    <div class="stat-text">部门数</div>
-                                    <div class="stat-digit">1,012</div>
-                                </div>
-                            </div>
-                        </div>
+                                </tr>
+                                </thead>
+                                <tbody>
+                               <%-- <c:forEach items="${list}" var="emp">
+                                    <tr>
+                                        <th >${emp.empno}</th>
+                                        <td>${emp.ename}</td>
+                                        <td>${emp.epass}</td>
+                                        <td>${emp.esex}</td>
+                                        <td>${emp.ebirth}</td>
+                                        <td>${emp.eidnum}</td>
+                                        <td>${emp.edeptno}</td>
+                                        <td>${emp.ejobno}</td>
+                                        <td>${emp.ehiredate}</td>
+                                        <td>${emp.etype}</td>
+                                        <td>${emp.esource}</td>
+                                        <td>${emp.estore}</td>
+                                        <td>
+                                            <select data-placeholder="离职类型" class="standardSelect" tabindex="1" onchange="self.location.href=options[selectedIndex].value">
+                                                <option value="" selected="selected">无</option>
+                                                <option value="http://localhost:8080/ManagementSystem/EmpServlet?method=quit&way=retire&empno=${emp.empno}">退休</option>
+                                                <option value="http://localhost:8080/ManagementSystem/EmpServlet?method=quit&way=dismiss&empno=${emp.empno}">辞退</option>
+                                                <option value="http://localhost:8080/ManagementSystem/EmpServlet?method=quit&way=resign&empno=${emp.empno}">主动辞职</option>
+                                                <option value="http://localhost:8080/ManagementSystem/EmpServlet?method=quit&way=fire&empno=${emp.empno}">开除</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                </c:forEach>&lt;%&ndash;&ndash;%&gt;--%>
+                                </tbody>
+                            </table>
+                        <%--</form>--%>
                     </div>
                 </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="stat-widget-one">
-                                <div class="stat-icon dib"><i class="ti-palette text-primary border-primary"></i></div>
-                                <div class="stat-content dib">
-                                    <div class="stat-text">岗位数</div>
-                                    <div class="stat-digit">961</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="stat-widget-one">
-                                <div class="stat-icon dib"><i class="ti-user text-warning border-warning"></i></div>
-                                <div class="stat-content dib">
-                                    <div class="stat-text">员工数</div>
-                                    <div class="stat-digit">770</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-
-                    <div class="card">
-                        <div class="card-header">
-                            <strong class="card-title">Dismissing Alerts</strong>
-                        </div>
-                        <div class="card-body">
-                            <div class="sufee-alert alert with-close alert-primary alert-dismissible fade show">
-                                <span class="badge badge-pill badge-primary">通知</span>
-                                公司通知1
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-
-                            <div class="sufee-alert alert with-close alert-secondary alert-dismissible fade show">
-                                <span class="badge badge-pill badge-secondary">通知</span>
-                                公司通知2
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4>项目进度</h4>
-                        </div>
-                        <div class="card-body">
-                            <p class="muted">在进展中的项目进度</p>
-                            <div class="progress mb-2">
-                                <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
-                            </div>
-                            <div class="progress mb-2">
-                                <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
-                            </div>
-                            <div class="progress mb-2">
-                                <div class="progress-bar bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">75%</div>
-                            </div>
-                            <div class="progress mb-2">
-                                <div class="progress-bar bg-danger" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">90%</div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /# card -->
-                </div><!-- /col-lg-6 -->
-
             </div>
-        </div>
+        </center>
+
     </div>
     <!-- /.content -->
     <div class="clearfix"></div>
@@ -324,7 +294,7 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
-<script src="assets/js/main.js"></script>
+<script src="../assets/js/main.js"></script>
 
 <!--  Chart js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.7.3/dist/Chart.bundle.min.js"></script>
@@ -338,11 +308,12 @@
 <script src="https://cdn.jsdelivr.net/npm/flot-spline@0.0.1/js/jquery.flot.spline.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/simpleweather@3.1.0/jquery.simpleWeather.min.js"></script>
-<script src="assets/js/init/weather-init.js"></script>
+<script src="../assets/js/init/weather-init.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.js"></script>
-<script src="assets/js/init/fullcalendar-init.js"></script>
+<script src="../assets/js/init/fullcalendar-init.js"></script>
+
 <!--Local Stuff-->
 <script>
     jQuery(document).ready(function ($) {
@@ -460,7 +431,7 @@
                     data.element.animate({
                         d: {
                             begin: 2000 * data.index,
-                            dur: 500,
+                            dur: 2000,
                             from: data.path.clone().scale(1, 0).translate(0, data.chartRect.height()).stringify(),
                             to: data.path.clone().stringify(),
                             easing: Chartist.Svg.Easing.easeOutQuint
@@ -488,7 +459,7 @@
                         },
                         {
                             label: "Bounce",
-                            borderColor: "rgba(245, 23, 66, 0.9)",
+                            borderColor: "rgba(245,23,66,0.9)",
                             borderWidth: "1",
                             backgroundColor: "rgba(245, 23, 66,.5)",
                             pointHighlightStroke: "rgba(245, 23, 66,.5)",
@@ -537,3 +508,4 @@
 </script>
 </body>
 </html>
+

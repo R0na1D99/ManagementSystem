@@ -132,8 +132,8 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                        aria-expanded="false"> <i class="menu-icon fa fa-minus-circle"></i>员工离职管理</a>
                     <ul class="sub-menu children dropdown-menu">
-                        <li><i class="menu-icon fa fa-th"></i><a href="#">员工离职</a></li>
-                        <li><i class="menu-icon fa fa-book"></i><a href="#">已离职员工信息查询</a></li>
+                        <li><i class="menu-icon fa fa-th"></i><a href="<%=basePath%>Emp/deleteEmp.jsp">员工离职</a></li>
+                        <li><i class="menu-icon fa fa-book"></i><a href="<%=basePath%>Emp/search.jsp">已离职员工信息查询</a></li>
                     </ul>
                 </li>
             </ul>
