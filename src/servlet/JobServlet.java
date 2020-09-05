@@ -43,9 +43,14 @@ public class JobServlet extends BaseServlet {
     public void delete(HttpServletRequest request, HttpServletResponse response) throws Exception {
         int jobno = Integer.valueOf(request.getParameter("jobno"));
         if(!String.valueOf(jobno).equals("")){
-            JobDAO jobDAO=new JobDAOImpl();
-            jobDAO.delete(jobno);
-            response.sendRedirect("/ManagementSystem/Jobs/modify.jsp");
+            JobDAO jobDAO = new JobDAOImpl();
+            if (new EmpDAOImpl().findByJobNo(jobno).size() > 0) {
+                request.setAttribute("error", "当前岗位下有员工！");
+                request.getRequestDispatcher("Jobs/modify.jsp").forward(request, response);
+            } else {
+                jobDAO.delete(jobno);
+                response.sendRedirect("/ManagementSystem/Jobs/modify.jsp");
+            }
         }else{
             response.sendRedirect("/ManagementSystem/Jobs/modify.jsp");
         }
@@ -84,9 +89,9 @@ public class JobServlet extends BaseServlet {
         if(s_jobno!=null&&!s_jobno.equals("")){
             EmpDAO empDAO=new EmpDAOImpl();
             List<Emp> emps=new ArrayList<Emp>();
-            emps=empDAO.findByJobNo(Integer.valueOf(s_jobno));
-            request.setAttribute("list",emps);
-            request.getRequestDispatcher("Jobs/showEmps.jsp").forward(request,response);
+            emps = empDAO.findByJobNo(Integer.valueOf(s_jobno));
+            request.getSession().setAttribute("list", emps);
+            request.getRequestDispatcher("Jobs/showEmps.jsp").forward(request, response);
         }else{
             request.getRequestDispatcher("Jobs/modify.jsp").forward(request,response);
         }

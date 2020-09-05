@@ -1,20 +1,20 @@
-<%@ page import="dao.EmpDAOImpl" %>
-<%@ page import="pojo.Emp" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %><%--
+<%@ page import="pojo.Emp" %>
+<%@ page import="dao.EmpDAOImpl" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%--
   Created by IntelliJ IDEA.
-  User: 大馒头
+  User: mlixi
   Date: 2020/9/3
-  Time: 20:18
+  Time: 9:06
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
-    EmpDAOImpl empDao = new EmpDAOImpl();
-    List<Emp> list = empDao.findAll();
-    session.setAttribute("list",list);
+    List<Emp> list = new EmpDAOImpl().findAll();
+    session.setAttribute("list", list);
 %>
 <!--[if lt IE 7]>
 <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -27,10 +27,9 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Empty</title>
+    <title>查看岗位信息</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
@@ -39,15 +38,15 @@
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
-    <link rel="stylesheet" href="<%=basePath%>assets/css/cs-skin-elastic.css">
-    <link rel="stylesheet" href="<%=basePath%>assets/css/style.css">
+    <link rel="stylesheet" href="<%=path%>/assets/css/cs-skin-elastic.css">
+    <link rel="stylesheet" href="<%=path%>/assets/css/style.css">
+    <link rel="stylesheet" href="<%=path%>/assets/css/lib/datatable/dataTables.bootstrap.min.css">
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
     <link href="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css" rel="stylesheet">
 
     <link href="https://cdn.jsdelivr.net/npm/weathericons@2.1.0/css/weather-icons.css" rel="stylesheet"/>
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.css" rel="stylesheet"/>
-
     <style>
         #weatherWidget .currentDesc {
             color: #ffffff !important;
@@ -92,6 +91,7 @@
 
     </style>
 </head>
+
 <body>
 <!-- Left Panel -->
 <aside id="left-panel" class="left-panel">
@@ -99,15 +99,15 @@
         <div id="main-menu" class="main-menu collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li class="active">
-                    <a href="<%=basePath%>index.jsp"><i class="menu-icon fa fa-laptop"></i>主页 </a>
+                    <a href="index.jsp"><i class="menu-icon fa fa-laptop"></i>主页 </a>
                 </li>
                 <li class="menu-title">管理中心</li><!-- /.menu-title -->
                 <li class="menu-item-has-children dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                        aria-expanded="false"> <i class="menu-icon fa fa-cogs"></i>部门管理</a>
                     <ul class="sub-menu children dropdown-menu">
-                        <li><i class="fa fa-id-badge"></i><a href="<%=basePath%>/Dept/addDept.jsp">新建部门</a></li>
-                        <li><i class="fa fa-bars"></i><a href="<%=basePath%>/Dept/deptManage.jsp">部门信息</a></li>
+                        <li><i class="fa fa-id-badge"></i><a href="#">新建部门</a></li>
+                        <li><i class="fa fa-bars"></i><a href="#">部门信息</a></li>
                     </ul>
                 </li>
                 <li class="menu-item-has-children dropdown">
@@ -122,18 +122,16 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                        aria-expanded="false"> <i class="menu-icon fa fa-user"></i>员工入职管理</a>
                     <ul class="sub-menu children dropdown-menu">
-                        <li><i class="menu-icon fa fa-th"></i><a href="<%=basePath%>Entry/TalentPool.jsp">从人才库中入职</a>
-                        </li>
-                        <li><i class="menu-icon fa fa-book"></i><a href="<%=basePath%>Entry/addEmp.jsp">普通入职</a></li>
+                        <li><i class="menu-icon fa fa-th"></i><a href="#">从人才库中入职</a></li>
+                        <li><i class="menu-icon fa fa-book"></i><a href="#">普通入职</a></li>
                     </ul>
                 </li>
                 <li class="menu-item-has-children dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                        aria-expanded="false"> <i class="menu-icon fa fa-minus-circle"></i>员工离职管理</a>
                     <ul class="sub-menu children dropdown-menu">
-                        <li><i class="menu-icon fa fa-th"></i><a href="<%=basePath%>Emps/deleteEmp.jsp">员工离职</a></li>
-                        <li><i class="menu-icon fa fa-book"></i><a href="<%=basePath%>Emps/search.jsp">已离职员工信息查询</a>
-                        </li>
+                        <li><i class="menu-icon fa fa-th"></i><a href="#">员工离职</a></li>
+                        <li><i class="menu-icon fa fa-book"></i><a href="#">已离职员工信息查询</a></li>
                     </ul>
                 </li>
             </ul>
@@ -190,7 +188,7 @@
                 <div class="user-area dropdown float-right">
                     <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true"
                        aria-expanded="false">
-                        <img class="user-avatar rounded-circle" src="<%=basePath%>images/admin.jpg" alt="User Avatar">
+                        <img class="user-avatar rounded-circle" src="<%=path%>/images/admin.jpg" alt="User Avatar">
                     </a>
 
                     <div class="user-menu dropdown-menu">
@@ -211,124 +209,47 @@
     <!-- /#header -->
     <!-- Content -->
     <div class="content">
-        <h1 align="center">员工离职管理</h1>
-        <br/>
-        <center>
-            <div class="col-lg-12">
-                <div class="card">
-                    <div class="card-header">
-                        <strong class="card-title">员工信息</strong>
-                    </div>
-                    <div class="card-body">
-                        <form action="EmpServlet?method=quit">
-                            <table class="table table-bordered">
+        <!-- Animated -->
+        <div class="animated fadeIn">
+            <div class="row">
+                <c:if test="${not empty error }">
+                    <div class="alert alert-primary" role="alert" style="margin-left: 40px">${error}</div>
+                </c:if>
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong class="card-title">岗位信息</strong>
+                        </div>
+                        <div class="card-body">
+                            <table id="bootstrap-data-table" class="table table-striped table-bordered">
                                 <thead>
                                 <tr>
-                                    <th scope="col">编号</th>
-                                    <th scope="col">姓名</th>
-                                    <th scope="col">性别</th>
-                                    <th scope="col">出生日期</th>
-                                    <th scope="col">身份证号</th>
-                                    <th scope="col">所在部门</th>
-                                    <th scope="col">任职岗位</th>
-                                    <th scope="col">入（离）日期</th>
-                                    <th scope="col">在职状态</th>
-                                    <th scope="col">来源</th>
-                                <th scope="col">进人才库</th>
-                                <th scope="col">操作</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <c:forEach items="${list}" var="emp">
-                                <c:if test="${emp.etype==1 || emp.etype==2}">
+                                    <th>姓名</th>
+                                    <th>身份证号</th>
+                                    <th>操作</th>
+                                    th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <c:forEach items="${list}" var="emp">
                                     <tr>
-                                        <th scope="col">${emp.empno}</th>
-                                        <th scope="col">${emp.ename}</th>
-                                        <c:choose>
-                                            <c:when test="${emp.esex==1}">
-                                                <th scope="col">男</th>
-                                            </c:when>
-                                            <c:when test="${emp.esex==2}">
-                                                <th scope="col">女</th>
-                                            </c:when>
-                                        </c:choose>
-                                        <th scope="col">${emp.ebirth}</th>
-                                        <th scope="col">${emp.eidnum}</th>
-                                        <th scope="col">${emp.deptno}</th>
-                                        <th scope="col">${emp.jobno}</th>
-                                        <th scope="col">${emp.ehiredate}</th>
-                                        <c:choose>
-                                            <c:when test="${emp.etype==0}">
-                                                <th scope="col">退休员工</th>
-                                            </c:when>
-                                            <c:when test="${emp.etype==1}">
-                                                <th scope="col">正式员工</th>
-                                            </c:when>
-                                            <c:when test="${emp.etype==2}">
-                                                <th scope="col">临时员工</th>
-                                            </c:when>
-                                            <c:when test="${emp.etype==3}">
-                                                <th scope="col">被辞退员工</th>
-                                            </c:when>
-                                            <c:when test="${emp.etype==4}">
-                                                <th scope="col">被开除员工</th>
-                                            </c:when>
-                                            <c:when test="${emp.etype==5}">
-                                                <th scope="col">主动离职员工</th>
-                                            </c:when>
-                                        </c:choose>
-                                        <c:choose>
-                                            <c:when test="${emp.esource==1}">
-                                                <th scope="col">校园招聘</th>
-                                            </c:when>
-                                            <c:when test="${emp.esource==2}">
-                                                <th scope="col">社会招聘</th>
-                                            </c:when>
-                                        </c:choose>
-                                        <td scope="col">
-                                            <select id="jtype" name="jtype" class="form-control"
-                                                    onchange="self.location.href=options[selectedIndex].value">
-                                                <c:choose>
-                                                    <c:when test="${emp.estore=='是'}">
-                                                        <option selected="selected"
-                                                                value="http://localhost:8080/ManagementSystem/EmpServlet?method=eClient&type=yes&empno=${emp.empno}">
-                                                            是
-                                                        </option>
-                                                        <option value="http://localhost:8080/ManagementSystem/EmpServlet?method=eClient&type=no&empno=${emp.empno}">
-                                                            否
-                                                        </option>
-                                                    </c:when>
-                                                    <c:when test="${emp.estore=='否'}">
-                                                        <option value="http://localhost:8080/ManagementSystem/EmpServlet?method=eClient&type=yes&empno=${emp.empno}">
-                                                            是
-                                                        </option>
-                                                        <option selected="selected"
-                                                                value="http://localhost:8080/ManagementSystem/EmpServlet?method=eClient&type=no&empno=${emp.empno}">
-                                                            否
-                                                        </option>
-                                                    </c:when>
-                                                </c:choose>
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <select data-placeholder="离职类型" class="form-control" tabindex="1"
-                                                    onchange="firm(options[selectedIndex].value,${emp.empno})">
-                                                <option value="retire">退休</option>
-                                                <option value="dismiss">辞退</option>
-                                                <option value="resign">主动辞职</option>
-                                                <option value="fire">开除</option>
-                                            </select>
-                                        </td>
+                                        <th>${emp.ename}</th>
+                                        <th>${emp.eidnum}</th>
+                                        <th>
+                                            <a href="<%=basePath%>JobServlet?method=modify&jobno=${emp.empno}">修改</a>
+                                            <a href="<%=basePath%>addEmp.jsp">添加到职工系统</a>
+                                        </th>
                                     </tr>
-                                </c:if>
-                            </c:forEach>
-                            </tbody>
-                        </table>
-                        </form>
+                                </c:forEach>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
+
             </div>
-        </center>
+        </div>
+        <!-- .animated -->
     </div>
     <!-- /.content -->
     <div class="clearfix"></div>
@@ -345,10 +266,10 @@
     <!-- /.site-footer -->
 </div>
 <!-- /#right-panel -->
-<script>
-    function firm(w, e) {
-        if (confirm("确定" + w + "?")) {
-            location.href = "<%=basePath%>EmpServlet?method=quit&way=" + w + "&empno=" + e;
+<script language="javascript">
+    function firm(jobno) {
+        if (confirm("确定删除？")) {
+            location.href = "<%=basePath%>JobServlet?method=delete&jobno=" + jobno;
         }
     }
 </script>
@@ -357,7 +278,18 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
-<script src="<%=basePath%>assets/js/main.js"></script>
+<script src="assets/js/main.js"></script>
+
+<script src="<%=path%>/assets/js/lib/data-table/datatables.min.js"></script>
+<script src="<%=path%>/assets/js/lib/data-table/dataTables.bootstrap.min.js"></script>
+<script src="<%=path%>/assets/js/lib/data-table/dataTables.buttons.min.js"></script>
+<script src="<%=path%>/assets/js/lib/data-table/buttons.bootstrap.min.js"></script>
+<script src="<%=path%>/assets/js/lib/data-table/jszip.min.js"></script>
+<script src="<%=path%>/assets/js/lib/data-table/vfs_fonts.js"></script>
+<script src="<%=path%>/assets/js/lib/data-table/buttons.html5.min.js"></script>
+<script src="<%=path%>/assets/js/lib/data-table/buttons.print.min.js"></script>
+<script src="<%=path%>/assets/js/lib/data-table/buttons.colVis.min.js"></script>
+<script src="<%=path%>/assets/js/init/datatables-init.js"></script>
 
 <!--  Chart js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.7.3/dist/Chart.bundle.min.js"></script>
@@ -371,17 +303,22 @@
 <script src="https://cdn.jsdelivr.net/npm/flot-spline@0.0.1/js/jquery.flot.spline.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/simpleweather@3.1.0/jquery.simpleWeather.min.js"></script>
-<script src="<%=basePath%>assets/js/init/weather-init.js"></script>
+<script src="assets/js/init/weather-init.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.js"></script>
 <script src="<%=basePath%>assets/js/init/fullcalendar-init.js"></script>
 
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#bootstrap-data-table-export').DataTable();
+    });
+</script>
+
 <!--Local Stuff-->
 <script>
     jQuery(document).ready(function ($) {
         "use strict";
-
         // Pie chart flotPie1
         var piedata = [
             {label: "Desktop visits", data: [[1, 32]], color: '#5c6bc0'},

@@ -6,11 +6,17 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+%>
 <!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang=""> <!--<![endif]-->
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -25,37 +31,58 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
-    <link rel="stylesheet" href="assets/css/cs-skin-elastic.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="<%=basePath%>assets/css/cs-skin-elastic.css">
+    <link rel="stylesheet" href="<%=basePath%>assets/css/style.css">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 </head>
-<body style="background-color: #FAFAD2">
+<body style="background-color: #DCDCDC">
 
 <div class="sufee-login d-flex align-content-center flex-wrap">
     <div class="container">
         <div class="login-content">
             <div class="login-logo">
                 <a href="login.jsp">
-                    <img class="align-content" src="images/logo.png" alt="">
+                    <img class="align-content" src="<%=basePath%>images/logo.png" alt="">
                 </a>
             </div>
+            <%
+                Cookie[] cookies = request.getCookies();
+                String username = "";
+                String password = "";
+                String checked = "";
+                if (cookies != null) {         //cookies exist
+                    for (int i = 0; i < cookies.length; i++) {
+                        String tname = cookies[i].getName();
+                        if (tname.equals("username")) {
+                            username = cookies[i].getValue();
+                            checked = "checked";
+                        }
+                        if (tname.equals("password")) {
+                            password = cookies[i].getValue();
+                        }
+                    }
+                }
+            %>
             <div class="login-form">
                 <form action="UserServlet?method=login" method="post">
                     <div class="form-group">
                         <label>用户名</label>
-                        <input name="username" type="text" class="form-control" placeholder="请输入用户名">
+                        <input name="username" maxlength="16" type="text" class="form-control" placeholder="请输入用户名"
+                               value="<%=username%>">
                     </div>
                     <div class="form-group">
                         <label>密码</label>
-                        <input name="password" type="password" class="form-control" placeholder="请输入密码">
+                        <input name="password" maxlength="12" type="password" class="form-control" placeholder="请输入密码"
+                               value="<%=password%>">
                     </div>
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox"> 记住密码
+                            <input type="checkbox" name="rememberme" <%=checked%>> 记住密码
                         </label>
                         <label class="pull-right">
                             <a href="#">忘记密码</a>
@@ -80,7 +107,7 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
-<script src="assets/js/main.js"></script>
+<script src="<%=basePath%>assets/js/main.js"></script>
 
 </body>
 </html>

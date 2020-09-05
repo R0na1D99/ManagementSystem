@@ -61,28 +61,29 @@
 				</li>
 				<li class="menu-item-has-children dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-					   aria-expanded="false"> <i class="menu-icon fa fa-table"></i>岗位管理</a>
-					<ul class="sub-menu children dropdown-menu">
-						<li><i class="fa fa-id-badge"></i><a href="<%=basePath%>Jobs/addJob.jsp">增加岗位</a></li>
-						<li><i class="fa fa-bars"></i><a href="<%=basePath%>Jobs/modify.jsp">岗位信息</a></li>
-					</ul>
-				</li>
-				<li class="menu-item-has-children dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-					   aria-expanded="false"> <i class="menu-icon fa fa-user"></i>员工入职管理</a>
-					<ul class="sub-menu children dropdown-menu">
-						<li><i class="menu-icon fa fa-th"></i><a href="#">从人才库中入职</a></li>
-						<li><i class="menu-icon fa fa-book"></i><a href="#">普通入职</a></li>
-					</ul>
-				</li>
-				<li class="menu-item-has-children dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-					   aria-expanded="false"> <i class="menu-icon fa fa-minus-circle"></i>员工离职管理</a>
-					<ul class="sub-menu children dropdown-menu">
-						<li><i class="menu-icon fa fa-th"></i><a href="<%=basePath%>Emps/deleteEmp.jsp">员工离职</a></li>
-						<li><i class="menu-icon fa fa-book"></i><a href="<%=basePath%>Emps/search.jsp">已离职员工信息查询</a>
-						</li>
-					</ul>
+                       aria-expanded="false"> <i class="menu-icon fa fa-table"></i>岗位管理</a>
+                    <ul class="sub-menu children dropdown-menu">
+                        <li><i class="fa fa-id-badge"></i><a href="<%=basePath%>Jobs/addJob.jsp">增加岗位</a></li>
+                        <li><i class="fa fa-bars"></i><a href="<%=basePath%>Jobs/modify.jsp">岗位信息</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item-has-children dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                       aria-expanded="false"> <i class="menu-icon fa fa-user"></i>员工入职管理</a>
+                    <ul class="sub-menu children dropdown-menu">
+                        <li><i class="menu-icon fa fa-th"></i><a href="<%=basePath%>Entry/TalentPool.jsp">从人才库中入职</a>
+                        </li>
+                        <li><i class="menu-icon fa fa-book"></i><a href="<%=basePath%>Entry/addEmp.jsp">普通入职</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item-has-children dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                       aria-expanded="false"> <i class="menu-icon fa fa-minus-circle"></i>员工离职管理</a>
+                    <ul class="sub-menu children dropdown-menu">
+                        <li><i class="menu-icon fa fa-th"></i><a href="<%=basePath%>Emps/deleteEmp.jsp">员工离职</a></li>
+                        <li><i class="menu-icon fa fa-book"></i><a href="<%=basePath%>Emps/search.jsp">已离职员工信息查询</a>
+                        </li>
+                    </ul>
 				</li>
 			</ul>
 		</div><!-- /.navbar-collapse -->

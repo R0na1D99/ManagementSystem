@@ -29,12 +29,12 @@ public class DeptDeleteController extends HttpServlet {
 			if (empList.size() == 0) {
 				int i = dao.deleteDept(Integer.parseInt(deptNo));
 				if (i > 0) {
-					request.getRequestDispatcher("DeptListController").forward(request, response);
-				}
+                    request.getRequestDispatcher("Dept/deptManage.jsp").forward(request, response);
+                }
 			} else {
-				request.setAttribute("error", "删除失败，该部门下已有员工");
-				request.getRequestDispatcher("DeptListController").forward(request, response);
-			}
+                request.setAttribute("error", "删除失败，该部门下已有员工");
+                request.getRequestDispatcher("Dept/deptManage.jsp").forward(request, response);
+            }
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

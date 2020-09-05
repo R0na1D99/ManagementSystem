@@ -1,20 +1,32 @@
 <%@ page import="dao.EmpDAOImpl" %>
 <%@ page import="pojo.Emp" %>
 <%@ page import="java.util.List" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %><%--
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.sql.Date" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%--
   Created by IntelliJ IDEA.
-  User: 大馒头
-  Date: 2020/9/3
-  Time: 20:18
+  User: LittleStrong
+  Date: 2020/9/4
+  Time: 9:43
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+/*    Date date=new java.sql.Date(new java.util.Date().getTime());
+    Emp a= new Emp(1,"JackBauer","123456",1,date,"1",1,1,date,0,1,"是");
+    Emp b=new Emp(2,"DonaldTrump","123456",1,date,"1",1,2,date,0,1,"否");
+    Emp c=new Emp(3,"TomCruise","123456",1,date,"1",1,1,date,1,1,"是");
+    List<Emp> list= new ArrayList<Emp>();
+    list.add(a);
+    list.add(b);
+    list.add(c);
+    session.setAttribute("list",list);*/
     EmpDAOImpl empDao = new EmpDAOImpl();
     List<Emp> list = empDao.findAll();
-    session.setAttribute("list",list);
+    session.setAttribute("list", list);
 %>
 <!--[if lt IE 7]>
 <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -24,6 +36,21 @@
 <html class="no-js lt-ie9" lang=""> <![endif]-->
 <!--[if gt IE 8]><!-->
 <html class="no-js" lang=""> <!--<![endif]-->
+<link rel="apple-touch-icon" href="https://i.imgur.com/QRAUqs9.png">
+<link rel="shortcut icon" href="https://i.imgur.com/QRAUqs9.png">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
+<link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
+<link rel="stylesheet" href="../assets/css/cs-skin-elastic.css">
+<link rel="stylesheet" href="../assets/css/lib/datatable/dataTables.bootstrap.min.css">
+<link rel="stylesheet" href="../assets/css/style.css">
+
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -92,6 +119,7 @@
 
     </style>
 </head>
+
 <body>
 <!-- Left Panel -->
 <aside id="left-panel" class="left-panel">
@@ -210,148 +238,64 @@
     </header>
     <!-- /#header -->
     <!-- Content -->
+
     <div class="content">
-        <h1 align="center">员工离职管理</h1>
-        <br/>
-        <center>
-            <div class="col-lg-12">
-                <div class="card">
-                    <div class="card-header">
-                        <strong class="card-title">员工信息</strong>
-                    </div>
-                    <div class="card-body">
-                        <form action="EmpServlet?method=quit">
-                            <table class="table table-bordered">
+        <div class="animated fadeIn">
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong class="card-title">TalentPool</strong>
+                        </div>
+                        <div class="card-body">
+                            <table id="bootstrap-data-table" class="table table-striped table-bordered">
                                 <thead>
                                 <tr>
-                                    <th scope="col">编号</th>
-                                    <th scope="col">姓名</th>
-                                    <th scope="col">性别</th>
-                                    <th scope="col">出生日期</th>
-                                    <th scope="col">身份证号</th>
-                                    <th scope="col">所在部门</th>
-                                    <th scope="col">任职岗位</th>
-                                    <th scope="col">入（离）日期</th>
-                                    <th scope="col">在职状态</th>
-                                    <th scope="col">来源</th>
-                                <th scope="col">进人才库</th>
-                                <th scope="col">操作</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <c:forEach items="${list}" var="emp">
-                                <c:if test="${emp.etype==1 || emp.etype==2}">
-                                    <tr>
-                                        <th scope="col">${emp.empno}</th>
-                                        <th scope="col">${emp.ename}</th>
-                                        <c:choose>
-                                            <c:when test="${emp.esex==1}">
-                                                <th scope="col">男</th>
-                                            </c:when>
-                                            <c:when test="${emp.esex==2}">
-                                                <th scope="col">女</th>
-                                            </c:when>
-                                        </c:choose>
-                                        <th scope="col">${emp.ebirth}</th>
-                                        <th scope="col">${emp.eidnum}</th>
-                                        <th scope="col">${emp.deptno}</th>
-                                        <th scope="col">${emp.jobno}</th>
-                                        <th scope="col">${emp.ehiredate}</th>
-                                        <c:choose>
-                                            <c:when test="${emp.etype==0}">
-                                                <th scope="col">退休员工</th>
-                                            </c:when>
-                                            <c:when test="${emp.etype==1}">
-                                                <th scope="col">正式员工</th>
-                                            </c:when>
-                                            <c:when test="${emp.etype==2}">
-                                                <th scope="col">临时员工</th>
-                                            </c:when>
-                                            <c:when test="${emp.etype==3}">
-                                                <th scope="col">被辞退员工</th>
-                                            </c:when>
-                                            <c:when test="${emp.etype==4}">
-                                                <th scope="col">被开除员工</th>
-                                            </c:when>
-                                            <c:when test="${emp.etype==5}">
-                                                <th scope="col">主动离职员工</th>
-                                            </c:when>
-                                        </c:choose>
-                                        <c:choose>
-                                            <c:when test="${emp.esource==1}">
-                                                <th scope="col">校园招聘</th>
-                                            </c:when>
-                                            <c:when test="${emp.esource==2}">
-                                                <th scope="col">社会招聘</th>
-                                            </c:when>
-                                        </c:choose>
-                                        <td scope="col">
-                                            <select id="jtype" name="jtype" class="form-control"
-                                                    onchange="self.location.href=options[selectedIndex].value">
-                                                <c:choose>
-                                                    <c:when test="${emp.estore=='是'}">
-                                                        <option selected="selected"
-                                                                value="http://localhost:8080/ManagementSystem/EmpServlet?method=eClient&type=yes&empno=${emp.empno}">
-                                                            是
-                                                        </option>
-                                                        <option value="http://localhost:8080/ManagementSystem/EmpServlet?method=eClient&type=no&empno=${emp.empno}">
-                                                            否
-                                                        </option>
-                                                    </c:when>
-                                                    <c:when test="${emp.estore=='否'}">
-                                                        <option value="http://localhost:8080/ManagementSystem/EmpServlet?method=eClient&type=yes&empno=${emp.empno}">
-                                                            是
-                                                        </option>
-                                                        <option selected="selected"
-                                                                value="http://localhost:8080/ManagementSystem/EmpServlet?method=eClient&type=no&empno=${emp.empno}">
-                                                            否
-                                                        </option>
-                                                    </c:when>
-                                                </c:choose>
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <select data-placeholder="离职类型" class="form-control" tabindex="1"
-                                                    onchange="firm(options[selectedIndex].value,${emp.empno})">
-                                                <option value="retire">退休</option>
-                                                <option value="dismiss">辞退</option>
-                                                <option value="resign">主动辞职</option>
-                                                <option value="fire">开除</option>
-                                            </select>
-                                        </td>
-                                    </tr>
-                                </c:if>
-                            </c:forEach>
-                            </tbody>
-                        </table>
-                        </form>
+                                    <th>姓名</th>
+                                    <th>身份证号</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <c:forEach items="${list}" var="emp">
+                                    <c:if test="${emp.estore=='是' && emp.etype!=1 && emp.etype!=2}">
+                                        <tr>
+                                            <td>${emp.ename}</td>
+                                            <td>${emp.eidnum}</td>
+                                            <td>
+                                                <a href="<%=basePath%>EmpServlet?method=modify&empno=${emp.empno}"
+                                                   style="color:dodgerblue">修改</a>&nbsp
+                                                <a href="<%=basePath%>EmpServlet?method=addTalent&empno=${emp.empno}"
+                                                   style="color:dodgerblue">添加到职工系统</a>
+                                            </td>
+                                        </tr>
+                                    </c:if>
+                                </c:forEach>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
-        </center>
-    </div>
-    <!-- /.content -->
+        </div><!-- .animated -->
+    </div><!-- .content -->
+
+
     <div class="clearfix"></div>
-    <!-- Footer -->
+
     <footer class="site-footer">
         <div class="footer-inner bg-white">
             <div class="row">
                 <div class="col-sm-6">
-                    Copyright &copy; 2018 Ela Admin
+                    Copyright &copy; 2020 LittleStrong
                 </div>
             </div>
         </div>
     </footer>
-    <!-- /.site-footer -->
 </div>
 <!-- /#right-panel -->
-<script>
-    function firm(w, e) {
-        if (confirm("确定" + w + "?")) {
-            location.href = "<%=basePath%>EmpServlet?method=quit&way=" + w + "&empno=" + e;
-        }
-    }
-</script>
+
 <!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
@@ -377,6 +321,16 @@
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.js"></script>
 <script src="<%=basePath%>assets/js/init/fullcalendar-init.js"></script>
 
+<script src="../assets/js/lib/data-table/datatables.min.js"></script>
+<script src="../assets/js/lib/data-table/dataTables.bootstrap.min.js"></script>
+<script src="../assets/js/lib/data-table/dataTables.buttons.min.js"></script>
+<script src="../assets/js/lib/data-table/buttons.bootstrap.min.js"></script>
+<script src="../assets/js/lib/data-table/jszip.min.js"></script>
+<script src="../assets/js/lib/data-table/vfs_fonts.js"></script>
+<script src="../assets/js/lib/data-table/buttons.html5.min.js"></script>
+<script src="../assets/js/lib/data-table/buttons.print.min.js"></script>
+<script src="../assets/js/lib/data-table/buttons.colVis.min.js"></script>
+<script src="../assets/js/init/datatables-init.js"></script>
 <!--Local Stuff-->
 <script>
     jQuery(document).ready(function ($) {

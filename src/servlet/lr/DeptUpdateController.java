@@ -40,7 +40,7 @@ public class DeptUpdateController extends HttpServlet {
                 e.printStackTrace();
             }
             request.setAttribute("error", "信息修改成功");
-            request.getRequestDispatcher("DeptListController").forward(request, response);
+            request.getRequestDispatcher("Dept/deptManage.jsp").forward(request, response);
         } else {
             request.setAttribute("error", "修改信息有误");
             request.getRequestDispatcher("Dept/modifyDept").forward(request, response);

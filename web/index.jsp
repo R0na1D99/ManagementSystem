@@ -1,4 +1,8 @@
-<%--
+<%@ page import="dao.DeptDaoImpl" %>
+<%@ page import="dao.JobDAOImpl" %>
+<%@ page import="dao.EmpDAOImpl" %>
+<%@ page import="pojo.Emp" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: mlixi
   Date: 2020/9/2
@@ -9,6 +13,10 @@
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+    int deptNum = new DeptDaoImpl().selectDeptList().size();
+    int jobNum = new JobDAOImpl().findAll().size();
+    List<Emp> elist = new EmpDAOImpl().findAll();
+    int empNum = elist.size();
 %>
 <!--[if lt IE 7]>
 <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -118,8 +126,9 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                        aria-expanded="false"> <i class="menu-icon fa fa-user"></i>员工入职管理</a>
                     <ul class="sub-menu children dropdown-menu">
-                        <li><i class="menu-icon fa fa-th"></i><a href="#">从人才库中入职</a></li>
-                        <li><i class="menu-icon fa fa-book"></i><a href="#">普通入职</a></li>
+                        <li><i class="menu-icon fa fa-th"></i><a href="<%=basePath%>Entry/TalentPool.jsp">从人才库中入职</a>
+                        </li>
+                        <li><i class="menu-icon fa fa-book"></i><a href="<%=basePath%>Entry/addEmp.jsp">普通入职</a></li>
                     </ul>
                 </li>
                 <li class="menu-item-has-children dropdown">
@@ -196,7 +205,8 @@
 
                         <a class="nav-link" href="#"><i class="fa fa -cog"></i>设置</a>
 
-                        <a class="nav-link" href="#"><i class="fa fa-power -off"></i>退出登录</a>
+                        <a class="nav-link" href="<%=basePath%>UserServlet?method=logout"><i
+                                class="fa fa-power -off"></i>退出登录</a>
                     </div>
                 </div>
 
@@ -217,7 +227,8 @@
                                 <div class="stat-icon dib"><i class="ti-comments text-success border-success"></i></div>
                                 <div class="stat-content dib">
                                     <div class="stat-text">部门数</div>
-                                    <div class="stat-digit">1,012</div>
+                                    <div class="stat-digit"><%=deptNum%>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -231,7 +242,8 @@
                                 <div class="stat-icon dib"><i class="ti-palette text-primary border-primary"></i></div>
                                 <div class="stat-content dib">
                                     <div class="stat-text">岗位数</div>
-                                    <div class="stat-digit">961</div>
+                                    <div class="stat-digit"><%=jobNum%>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -245,15 +257,49 @@
                                 <div class="stat-icon dib"><i class="ti-user text-warning border-warning"></i></div>
                                 <div class="stat-content dib">
                                     <div class="stat-text">员工数</div>
-                                    <div class="stat-digit">770</div>
+                                    <div class="stat-digit"><%=empNum%>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
 
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>员工分布情况</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <p class="data-attributes">
+                                        <span data-peity='{ "fill": ["#13DAFE", "#eeeeee"],    "innerRadius": 30, "radius": 60 }'>2/4</span>
+                                    </p>
+                                </div>
+                                <div class="col-lg-3">
+                                    <p class="data-attributes">
+                                        <span data-peity='{ "fill": ["#6164C1", "#eeeeee"], "innerRadius": 34, "radius": 56 }'>2/7</span>
+                                    </p>
+                                </div>
+                                <div class="col-lg-3">
+                                    <p class="data-attributes">
+                                        <span data-peity='{ "fill": ["#F96262", "#eeeeee"], "innerRadius": 38, "radius": 52 }'>3/7</span>
+                                    </p>
+                                </div>
+                                <div class="col-lg-3">
+                                    <p class="data-attributes">
+                                        <span data-peity='{ "fill": ["#99D683", "#eeeeee"],  "innerRadius": 40, "radius": 48 }'>1/7</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /# card -->
+                </div>
                 <div class="col-md-6">
-
                     <div class="card">
                         <div class="card-header">
                             <strong class="card-title">Dismissing Alerts</strong>
@@ -286,22 +332,28 @@
                         <div class="card-body">
                             <p class="muted">在进展中的项目进度</p>
                             <div class="progress mb-2">
-                                <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                                <div class="progress-bar bg-success" role="progressbar" style="width: 25%"
+                                     aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%
+                                </div>
                             </div>
                             <div class="progress mb-2">
-                                <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
+                                <div class="progress-bar bg-info" role="progressbar" style="width: 50%"
+                                     aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%
+                                </div>
                             </div>
                             <div class="progress mb-2">
-                                <div class="progress-bar bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">75%</div>
+                                <div class="progress-bar bg-warning" role="progressbar" style="width: 75%"
+                                     aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">75%
+                                </div>
                             </div>
                             <div class="progress mb-2">
-                                <div class="progress-bar bg-danger" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">90%</div>
+                                <div class="progress-bar bg-danger" role="progressbar" style="width: 90%"
+                                     aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">90%
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <!-- /# card -->
-                </div><!-- /col-lg-6 -->
-
+                </div>
             </div>
         </div>
     </div>
@@ -346,6 +398,11 @@
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.js"></script>
 <script src="<%=basePath%>assets/js/init/fullcalendar-init.js"></script>
 <!--Local Stuff-->
+<script src="https://cdn.jsdelivr.net/npm/peity@3.3.0/jquery.peity.min.js"></script>
+<!-- scripit init-->
+<script src="<%=basePath%>assets/js/init/peitychart-init.js"></script>
+<!-- scripit init-->
+
 <script>
     jQuery(document).ready(function ($) {
         "use strict";

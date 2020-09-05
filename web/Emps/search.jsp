@@ -125,8 +125,9 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                        aria-expanded="false"> <i class="menu-icon fa fa-user"></i>员工入职管理</a>
                     <ul class="sub-menu children dropdown-menu">
-                        <li><i class="menu-icon fa fa-th"></i><a href="#">从人才库中入职</a></li>
-                        <li><i class="menu-icon fa fa-book"></i><a href="#">普通入职</a></li>
+                        <li><i class="menu-icon fa fa-th"></i><a href="<%=basePath%>Entry/TalentPool.jsp">从人才库中入职</a>
+                        </li>
+                        <li><i class="menu-icon fa fa-book"></i><a href="<%=basePath%>Entry/addEmp.jsp">普通入职</a></li>
                     </ul>
                 </li>
                 <li class="menu-item-has-children dropdown">
@@ -244,7 +245,7 @@
                                 </thead>
                                 <tbody>
                                 <c:forEach items="${list}" var="emp">
-                                    <c:if test="${emp.etype!=1}">
+                                    <c:if test="${emp.etype!=1 && emp.etype!=2}">
                                         <tr>
                                             <th scope="col">${emp.empno}</th>
                                             <th scope="col">${emp.ename}</th>

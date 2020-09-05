@@ -22,7 +22,7 @@ public class LoginFilter implements Filter {
                 !str.contains("UserServlet") &&
                 !str.contains(".css") &&
                 !(str.contains(".js") && !str.contains(".jsp")) &&
-                !str.contains("index.jsp") &&
+                !str.contains("login.jsp") &&
                 session.getAttribute("user") == null) {
             req.setAttribute("error", "请先登录！");
             req.getRequestDispatcher("").forward(req, res);

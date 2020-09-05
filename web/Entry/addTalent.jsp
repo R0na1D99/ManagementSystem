@@ -1,20 +1,23 @@
-<%@ page import="dao.EmpDAOImpl" %>
-<%@ page import="pojo.Emp" %>
+<%@ page import="dao.JobDAOImpl" %>
+<%@ page import="pojo.Job" %>
 <%@ page import="java.util.List" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %><%--
+<%@ page import="pojo.Dept" %>
+<%@ page import="dao.DeptDaoImpl" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %><%--
   Created by IntelliJ IDEA.
-  User: 大馒头
+  User: mlixi
   Date: 2020/9/3
-  Time: 20:18
+  Time: 13:07
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
-    EmpDAOImpl empDao = new EmpDAOImpl();
-    List<Emp> list = empDao.findAll();
-    session.setAttribute("list",list);
+    List<Job> jobList = new JobDAOImpl().findAll();
+    List<Dept> deptList = new DeptDaoImpl().selectDeptList();
+    session.setAttribute("jobList", jobList);
+    session.setAttribute("deptList", deptList);
 %>
 <!--[if lt IE 7]>
 <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -27,10 +30,9 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Empty</title>
+    <title>修改岗位信息</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
@@ -92,6 +94,7 @@
 
     </style>
 </head>
+
 <body>
 <!-- Left Panel -->
 <aside id="left-panel" class="left-panel">
@@ -211,124 +214,123 @@
     <!-- /#header -->
     <!-- Content -->
     <div class="content">
-        <h1 align="center">员工离职管理</h1>
-        <br/>
-        <center>
-            <div class="col-lg-12">
+        <!-- Animated -->
+        <div class="animated fadeIn">
+            <div class="col-lg-6">
                 <div class="card">
                     <div class="card-header">
-                        <strong class="card-title">员工信息</strong>
+                        <strong>员工信息：</strong> <strong>${emp.ename}</strong>
                     </div>
-                    <div class="card-body">
-                        <form action="EmpServlet?method=quit">
-                            <table class="table table-bordered">
-                                <thead>
-                                <tr>
-                                    <th scope="col">编号</th>
-                                    <th scope="col">姓名</th>
-                                    <th scope="col">性别</th>
-                                    <th scope="col">出生日期</th>
-                                    <th scope="col">身份证号</th>
-                                    <th scope="col">所在部门</th>
-                                    <th scope="col">任职岗位</th>
-                                    <th scope="col">入（离）日期</th>
-                                    <th scope="col">在职状态</th>
-                                    <th scope="col">来源</th>
-                                <th scope="col">进人才库</th>
-                                <th scope="col">操作</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <c:forEach items="${list}" var="emp">
-                                <c:if test="${emp.etype==1 || emp.etype==2}">
-                                    <tr>
-                                        <th scope="col">${emp.empno}</th>
-                                        <th scope="col">${emp.ename}</th>
-                                        <c:choose>
-                                            <c:when test="${emp.esex==1}">
-                                                <th scope="col">男</th>
-                                            </c:when>
-                                            <c:when test="${emp.esex==2}">
-                                                <th scope="col">女</th>
-                                            </c:when>
-                                        </c:choose>
-                                        <th scope="col">${emp.ebirth}</th>
-                                        <th scope="col">${emp.eidnum}</th>
-                                        <th scope="col">${emp.deptno}</th>
-                                        <th scope="col">${emp.jobno}</th>
-                                        <th scope="col">${emp.ehiredate}</th>
-                                        <c:choose>
-                                            <c:when test="${emp.etype==0}">
-                                                <th scope="col">退休员工</th>
-                                            </c:when>
-                                            <c:when test="${emp.etype==1}">
-                                                <th scope="col">正式员工</th>
-                                            </c:when>
-                                            <c:when test="${emp.etype==2}">
-                                                <th scope="col">临时员工</th>
-                                            </c:when>
-                                            <c:when test="${emp.etype==3}">
-                                                <th scope="col">被辞退员工</th>
-                                            </c:when>
-                                            <c:when test="${emp.etype==4}">
-                                                <th scope="col">被开除员工</th>
-                                            </c:when>
-                                            <c:when test="${emp.etype==5}">
-                                                <th scope="col">主动离职员工</th>
-                                            </c:when>
-                                        </c:choose>
-                                        <c:choose>
-                                            <c:when test="${emp.esource==1}">
-                                                <th scope="col">校园招聘</th>
-                                            </c:when>
-                                            <c:when test="${emp.esource==2}">
-                                                <th scope="col">社会招聘</th>
-                                            </c:when>
-                                        </c:choose>
-                                        <td scope="col">
-                                            <select id="jtype" name="jtype" class="form-control"
-                                                    onchange="self.location.href=options[selectedIndex].value">
-                                                <c:choose>
-                                                    <c:when test="${emp.estore=='是'}">
-                                                        <option selected="selected"
-                                                                value="http://localhost:8080/ManagementSystem/EmpServlet?method=eClient&type=yes&empno=${emp.empno}">
-                                                            是
-                                                        </option>
-                                                        <option value="http://localhost:8080/ManagementSystem/EmpServlet?method=eClient&type=no&empno=${emp.empno}">
-                                                            否
-                                                        </option>
-                                                    </c:when>
-                                                    <c:when test="${emp.estore=='否'}">
-                                                        <option value="http://localhost:8080/ManagementSystem/EmpServlet?method=eClient&type=yes&empno=${emp.empno}">
-                                                            是
-                                                        </option>
-                                                        <option selected="selected"
-                                                                value="http://localhost:8080/ManagementSystem/EmpServlet?method=eClient&type=no&empno=${emp.empno}">
-                                                            否
-                                                        </option>
-                                                    </c:when>
-                                                </c:choose>
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <select data-placeholder="离职类型" class="form-control" tabindex="1"
-                                                    onchange="firm(options[selectedIndex].value,${emp.empno})">
-                                                <option value="retire">退休</option>
-                                                <option value="dismiss">辞退</option>
-                                                <option value="resign">主动辞职</option>
-                                                <option value="fire">开除</option>
-                                            </select>
-                                        </td>
-                                    </tr>
-                                </c:if>
-                            </c:forEach>
-                            </tbody>
-                        </table>
+                    <div class="card-body card-block">
+                        <form action="<%=basePath%>EmpServlet?method=addOld" method="post" class="form-horizontal">
+                            <div class="row form-group">
+                                <div class="col col-md-3"><label for="jobno" class=" form-control-label">员工号</label>
+                                </div>
+                                <div class="col-md-9"><input type="text" id="jobno" name="jobno" value="${emp.empno}"
+                                                             readonly="readonly" class="form-control"></div>
+                            </div>
+
+                            <div class="row form-group">
+                                <div class="col col-md-3"><label for="ename" class=" form-control-label">员工姓名</label>
+                                </div>
+                                <div class="col-md-9"><input type="text" id="ename" name="ename" value="${emp.ename}"
+                                                             readonly="readonly" class="form-control"></div>
+                            </div>
+
+                            <div class="row form-group">
+                                <div class="col col-md-3"><label for="epass" class=" form-control-label">密码</label>
+                                </div>
+                                <div class="col-md-9"><input type="text" id="epass" name="epass" value="${emp.epass}"
+                                                             readonly="readonly" class="form-control"></div>
+                            </div>
+
+                            <div class="row form-group">
+                                <div class="col col-md-3"><label class=" form-control-label">出生日期</label></div>
+                                <div class="col-md-9">
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                                        <input type="date" class="form-control" name="ebirth" value="${emp.ebirth}"
+                                               readonly="readonly">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row form-group">
+                                <div class="col col-md-3"><label for="esex" class=" form-control-label">性别</label></div>
+                                <div class="col-md-9"><input type="text" id="esex" name="esex" value="${emp.esex}"
+                                                             readonly="readonly" class="form-control"></div>
+                            </div>
+
+                            <div class="row form-group">
+                                <div class="col col-md-3"><label for="eidnum" class=" form-control-label">身份证号</label>
+                                </div>
+                                <div class="col-md-9"><input type="text" id="eidnum" name="eidnum" value="${emp.eidnum}"
+                                                             readonly="readonly" class="form-control"></div>
+                            </div>
+
+                            <div class="row form-group">
+                                <div class="col col-md-3"><label class=" form-control-label">入职日期</label></div>
+                                <div class="col-12 col-md-9">
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                                        <input type="date" class="form-control" name="ehiredate"
+                                               value="${emp.ehiredate}">
+                                    </div>
+                                    <small class="form-text text-muted">修改入职日期</small>
+                                </div>
+                            </div>
+
+                            <div class="row form-group">
+                                <div class="col col-md-3"><label class=" form-control-label">部门</label></div>
+                                <div class="col-12 col-md-9">
+                                    <select name="jname" class="form-control" tabindex="1">
+                                        <c:forEach items="${deptList}" var="dept">
+                                            <option value="${dept.deptNo}">${dept.dName}</option>
+                                        </c:forEach>
+                                    </select>
+                                    <small class="form-text text-muted">设置部门</small>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-3"><label class=" form-control-label">岗位</label></div>
+                                <div class="col-12 col-md-9">
+                                    <select name="jtype" class="form-control" tabindex="1">
+                                        <c:forEach items="${jobList}" var="job">
+                                            <option value="${job.jobno}">${job.jname}</option>
+                                        </c:forEach>
+                                    </select>
+                                    <small class="form-text text-muted">设置岗位</small>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-3"><label class=" form-control-label">用工形式</label></div>
+                                <div class="col-md-9">
+                                    <select name="etype" class="form-control" tabindex="1">
+                                        <option value="" selected="selected">请选择</option>
+                                        <option value="1">正式工</option>
+                                        <option value="2">临时工</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row form-group">
+                                <div class="col col-md-3"><label class=" form-control-label">人员来源</label></div>
+                                <div class="col-md-9">
+                                    <select name="esource" class="form-control" tabindex="1">
+                                        <option value="" selected="selected">请选择</option>
+                                        <option value="1">校园招聘</option>
+                                        <option value="2">社会招聘</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <button class="btn btn-outline-secondary btn-lg active">添加员工</button>
                         </form>
                     </div>
                 </div>
             </div>
-        </center>
+        </div>
+        <!-- .animated -->
     </div>
     <!-- /.content -->
     <div class="clearfix"></div>
@@ -345,13 +347,7 @@
     <!-- /.site-footer -->
 </div>
 <!-- /#right-panel -->
-<script>
-    function firm(w, e) {
-        if (confirm("确定" + w + "?")) {
-            location.href = "<%=basePath%>EmpServlet?method=quit&way=" + w + "&empno=" + e;
-        }
-    }
-</script>
+
 <!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
